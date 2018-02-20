@@ -1,0 +1,29 @@
+{
+  "name": "group-devotions",
+  "description": "Website for hosting devotionals w/blogs",
+  "version": "0.1.0",
+  "homepage": "https://www.groupdevotions.com",
+  "private": true,
+  "ignore": [
+    ".gitinore"
+  ],
+  "dependencies": {
+    "angular": "1.4.x",
+    "angular-route": "1.4.x",
+    "angular-sanitize": "1.4.x",
+    "angular-loader": "1.4.x",
+    "angular-resource": "~1.4.x",
+    "angular-mocks": "~1.4.x",
+    "angular-touch": "~1.4.x",
+    "html5-boilerplate": "~4.3.0",
+    "underscore": "~1.8.3",
+    "angular-bootstrap": "~2.0.0",
+    "linkifyjs": "~2.1.1",
+    "bootstrap": "3.2.0",
+    "jquery": "2.1.1"
+
+  },
+  "resolutions": {
+    "angular": "1.4.x"
+  }
+}

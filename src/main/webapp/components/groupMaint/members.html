@@ -1,0 +1,107 @@
+<div ng-if="message.text" ng-click="tryAgain()" class="alert alert-{{message.type}}" role="alert" id="message">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    {{message.text}}
+</div>
+<div class="members">
+    <div aria-hidden="true" ng-show="!currentMember">
+        <div class="hidden-xs">
+            <h1>Maintain Members <span ng-if="group && group.description">for {{group.description}}</span>
+                <a role="navigation" ng-click="editGroup()"><span class="glyphicon glyphicon-pencil" title="Edit"></span></a>
+            </h1>
+            <button role="navigation" ng-click="addMember()" class="btn btn-md btn-primary pull-right">Add Member</button>
+        </div>
+
+        <div class="hidden-xs filter-container">
+            <span>
+                Filter By:
+                <select ng-model="filterValue">
+                  <option value="">No Filter</option>
+                  <option value="EMAILED">Emailed</option>
+                  <option value="DECLINED">Declined</option>
+                  <option value="JOINED">Joined</option>
+                </select>
+            </span>
+            <a role="navigation" class="pull-right" ng-click="return()" id="viewGroup">{{returnDescription}}</a>
+        </div>
+
+        <div class="visible-xs">
+            <h1>Maintain Members <span ng-if="group">for {{group.description}}</span>
+                <a role="navigation" ng-click="editGroup()"><span class="glyphicon glyphicon-pencil" title="Edit"></span></a>
+            </h1>
+            <a id="return-sm" role="navigation" ng-click="return()">Return to Group</a>
+            <button role="navigation" ng-click="addMember()" class="btn btn-md btn-primary pull-right">Add Member</button>
+        </div>
+    </div>
+
+    <div ng-show="!currentMember" class="row row-grid-header">
+        <span class="col-xs-11 col-sm-3">Name</span>
+        <span class="hidden-xs col-sm-4">Email</span>
+        <span class="hidden-xs col-sm-2">Status</span>
+        <span class="hidden-xs col-sm-2">Admin</span>
+        <span class="col-xs-1 col-sm-1"></span>
+    </div>
+
+    <div ng-show="!currentMember" ng-click="editMember(member)" class="row row-grid" ng-repeat="member in members | filterMembers:filterValue | orderBy: 'name' track by member.key">
+        <span class="col-xs-11 col-sm-3">{{member.name}}</span>
+        <span class="hidden-xs col-sm-4">{{member.email}}</span>
+        <span class="hidden-xs col-sm-2">{{member.status | titlecase}}</span>
+        <span class="hidden-xs col-sm-2">
+            <input id="groupAdmin2" type="checkbox" class="fieldLabel" ng-model="member.groupAdmin" disabled ng-value="member.groupAdmin"/>
+        </span>
+        <span class="col-xs-1 col-sm-1 pull-right"><a href="javascript:void(0)"><span class="glyphicon glyphicon-pencil" title="Edit"></span></a></span>
+    </div>
+
+    <form class="memberForm" ng-if="currentMember">
+        <h1 ng-show="!currentMember.key">Add Member</h1>
+        <h1 ng-show="currentMember.key">Edit Member</h1>
+        <fieldset class="form-group">
+            <div class="row">
+                <div class="visible-xs col-xs-12"><label for="memberName">Name</label></div>
+                <div class="hidden-xs col-sm-4 text-right"><label for="memberName">Name</label></div>
+                <div class="col-xs-12 col-sm-8"><input auto-focus id="memberName" type="text" ng-model="currentMember.name" maxLength="80" width="30"/></div>
+            </div>
+            <div class="row">
+                <div class="visible-xs col-xs-12"><label for="emailAddress">Email Address</label></div>
+                <div class="hidden-xs col-sm-4 text-right"><label for="emailAddress">Email Address</label></div>
+                <div class="col-xs-12 col-sm-8"><input id="emailAddress" type="text" ng-model="currentMember.email" maxLength="80" width="30"/></div>
+            </div>
+            <div class="row">
+                <div class="visible-xs col-xs-12"><label for="groupAdmin">Group Administrator?</label></div>
+                <div class="hidden-xs col-sm-4 text-right"><label for="groupAdmin">Group Administrator?</label></div>
+                <div class="col-xs-12 col-sm-8" id="groupAdmin">
+                    <input type="radio" class="fieldLabel" ng-model="currentMember.groupAdmin"
+                           ng-value="true"/>Yes
+                    <input type="radio" class="fieldLabel" ng-model="currentMember.groupAdmin"
+                           ng-value="false"/>No
+                </div>
+            </div>
+            <div ng-show="currentMember.key" class="row">
+                <div class="hidden-xs col-sm-4 text-right">Status</div>
+                <div class="hidden-xs col-sm-8">{{currentMember.status | titlecase}}</div>
+                <div class="visible-xs col-xs-12">Status: {{currentMember.status | titlecase}}</div>
+            </div>
+            <!--div><span>Phone</span>{{account.phone}}</div>
+            <div><span>Accepts Texts?</span>{{member.acceptTexts}}</div>
+            <div><span>Screen Format?</span>{{member.screenFormat}}</div>
+            <div><span>Posting Notifications?</span>{{member.postingNotification}}</div>
+            <div><span>Sign Up Date</span> <span>{{member.signUpDate}}</span></div>
+            <div><span>Last Login Date</span> <span>{{member.lastLoginDate}}</span></div>
+            <div><span>Last Accountability Date</span> <span>{{member.lastAccountabilityDate}}</span></div-->
+            <!--div><span>Disabled?</span> <input type="text" ng-model="member.disabled" maxLength="15" width="15"/></div-->
+            <div>
+                <button role="navigation" ng-click="saveMember(currentMember)" ng-disabled="saving"
+                        id="saveButton" class="btn btn-lg btn-primary">
+                    <span ng-show="currentMember.status == 'JOINED' || currentMember.status == 'DECLINED'">Save</span>
+                    <span ng-show="currentMember.status !== 'JOINED' && currentMember.status !== 'DECLINED'">Email Invitation</span>
+                </button>
+                <button role="navigation" ng-click="cancelEditMember(currentMember)" ng-disabled="saving"
+                        id="cancelEditButton" class="btn btn-lg my-btn">Cancel
+                </button>
+                <button role="navigation" ng-if="currentMember.key && userInfo.groupMember.key !== currentMember.key" ng-click="deleteMember()" ng-disabled="saving"
+                        id="deleteMember" class="btn btn-lg my-btn">Delete
+                </button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div ng-show="loading">Loading data...</div>

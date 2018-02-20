@@ -1,0 +1,8 @@
+/target/
+/bower_components/
+/node_modules/
+/*.log
+/*.cmd
+/groupdevotions.iml
+/.idea/
+.DS_Store

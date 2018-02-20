@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datastore-indexes autoGenerate="true">
+    <datastore-index kind="Account" ancestor="false">
+    	<property name="email" direction="asc" />
+    	<property name="userId" direction="asc" />
+    </datastore-index>
+    <datastore-index kind="GroupBlog" ancestor="false">
+    	<property name="groupKey" direction="asc" />
+    	<property name="blogDate" direction="asc" />
+    </datastore-index>
+    <datastore-index kind="Journal" ancestor="false">
+    	<property name="accountKey" direction="asc" />
+    	<property name="forDay" direction="desc" />
+    </datastore-index>
+    <datastore-index kind="Study" ancestor="false">
+    	<property name="studyByDate" direction="asc" />
+    	<property name="publicStudy" direction="asc" />
+    </datastore-index>
+</datastore-indexes>
+

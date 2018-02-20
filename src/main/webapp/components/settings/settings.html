@@ -1,0 +1,125 @@
+<div class="devotionContainer" width="100%">
+    <div ng-if="message.text" ng-click="tryAgain()" class="alert alert-{{message.type}}" role="alert" id="message">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        {{message.text}}</div>
+    <app-loading loading="mode == LOADING"></app-loading>
+
+    <div ng-if="mode == SETTINGS" width="100%">
+        <form name="forms.settings">
+            <div class="maintainPanel">
+                <div width="100%">
+                    <div id="title" class="pageHeading settingsHeading"><span ng-if="!userInfo.account.settingsConfirmed">Initial </span>Settings</div>
+                </div>
+                <div ng-if="userInfo.account.settingsConfirmed" width="100%">
+                    <div text="&nbsp;"/>
+                    <a ng-if="userInfo.account.allowPasswordChange" class="link" id="passwordChange"
+                       ng-click="displayPwChange()">Change Your Password</a>
+                </div>
+            </div>
+
+            <div>
+                <div class="devotionContainer" width="100%">
+                    <div width="100%">
+                        <div class="pageSubheading">Account Details
+                        </div>
+                        <div class="instructions">
+                            Your name and phone number will be available to other group members and are not used for purposes outside your group.
+                        </div>
+                        <div class="halfEm"/>
+                    </div>
+                    <div>
+                        <div class="fieldLabel">Name:</div>
+                        <input auto-focus type="text" class="fieldInput" maxLength="35"
+                               ng-model="userInfo.account.name"/>
+                    </div>
+                    <div ng-if="userInfo.account.privacyAvailableInSettings" class="halfEm"/>
+                    <div ng-if="userInfo.account.privacyAvailableInSettings">
+                        <span class="fieldLabel">Do you wish to make your contact information available to the group? </span>
+                        <input type="radio" class="fieldLabel" ng-model="userInfo.account.privacy"
+                               ng-value="false"/>Yes
+                        <input type="radio" class="fieldLabel" ng-model="userInfo.account.privacy"
+                               ng-value="true"/>No
+                    </div>
+                    <div class="halfEm"/>
+                    <div>
+                        <div class="fieldLabel">Phone Number (optional):</div>
+                        <input type="text" class="fieldInput" maxLength="15"
+                               ng-model="userInfo.account.phone"/>
+                    </div>
+                    <div class="halfEm"/>
+                    <div>
+                        <span class="fieldLabel">Do you accept texts? </span>
+                        <input type="radio" class="fieldLabel" ng-model="userInfo.account.acceptTexts"
+                               ng-value="true"/>Yes
+                        <input type="radio" class="fieldLabel" ng-model="userInfo.account.acceptTexts"
+                               ng-value="false"/>No
+                    </div>
+                    <div class="halfEm"/>
+                    <div ng-if="userInfo.account.settingsConfirmed" >
+                        <span class="fieldLabel floatLeft">Screen format? </span>
+                        <input type="radio" class="fieldLabel" ng-model="userInfo.account.screenFormat"
+                               value="DETECT">Detect
+                        <input type="radio" class="fieldLabel" ng-model="userInfo.account.screenFormat"
+                               value="PHONE">Phone
+                        <input type="radio" class="fieldLabel" ng-model="userInfo.account.screenFormat"
+                               value="MONITOR">Monitor
+                    </div>
+                    <div class="halfEm"/>
+                    <div>
+                        <span class="fieldLabel floatLeft">Monitor postings? </span>
+                        <input type="radio" class="fieldLabel"
+                               ng-model="userInfo.account.postingNotification" value="NO">No
+                        <input type="radio" class="fieldLabel"
+                               ng-model="userInfo.account.postingNotification" value="EMAIL">Email
+                        <div class="instructions">When turned on, comments to the group will be emailed to you.  If you don't log into the group for five days, email monitoring will
+                            automatically stop to prevent spamming and protect group privacy.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="halfEm"/>
+
+            <div class="maintainPanel">
+                <div class="devotionContainer" width="100%">
+                    <div width="100%">
+                        <div class="pageSubheading">Daily Studies</div>
+                    </div>
+                    <div class="fieldLabel">Your daily devotions/studies are:</div>
+                    <div ng-repeat="study in availableStudies">
+                        <input type="checkbox" ng-model="study.subscribed" ng-true-value="true" ng-false-value="false"
+                               ng-change="onStudyCheckboxChange(study)"/> {{study.title}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="oneEm"/>
+            <div>
+                <button id="settingsSaveButton" ng-click="save()" class="btn btn-lg btn-primary">{{saveLabel}}</button>
+                <button ng-if="userInfo.account.settingsConfirmed" id="settingsCancelButton" ng-click="cancel()" class="btn btn-lg btn-default">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div ng-show="mode == PWCHANGE" class="devotionContainer">
+        <div>
+            <div class="pageHeading">Password Change</div>
+            <div>
+                <div class="fieldLabel">New Password:</div>
+                <input id="password1" type="password" class="fieldInput" maxLength="35"
+                       ng-model="passwordChange.password1"/>
+            </div>
+            <div>
+                <div class="fieldLabel">New Password: (please enter it again)</div>
+                <input id="password2" type="password" class="fieldInput" maxLength="35"
+                       ng-model="passwordChange.password2"/>
+            </div>
+            <div class="oneEm"/>
+            <div>
+                <button id="saveButton" ng-click="savePassword()" class="btn btn-lg btn-primary">Change Password
+                </button>
+                <button id="cancelButton" ng-click="cancelPwChange()" class="btn btn-lg btn-default">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

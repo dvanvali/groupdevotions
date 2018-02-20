@@ -1,0 +1,42 @@
+<h1>Configure Your Group</h1>
+<div ng-if="message.text" ng-click="tryAgain()" class="alert alert-{{message.type}}" role="alert" id="message">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    {{message.text}}
+</div>
+<div>
+    <div ng-if="studies" class="pick-group">
+        <form name="forms.groupForm">
+            <label ng-if="accountNameMissing" for="yourName">Your Name:</label>
+            <input id="yourName" type="text" auto-focus ng-model="userInfo.account.name" maxLength="80" width="30"/>
+
+            <label for="study-selection">
+                Please pick a devotional to read:
+            </label>
+
+            <div class="row-separator"></div>
+            <div ng-repeat="study in studies">
+                <input id="study-selection" type="radio" class="fieldLabel" ng-model="group.studyKey" ng-value="study.key"/>
+                <span id="study-title">{{study.title}}</span>
+                <span id="study-description">{{study.description}}</span>
+                <div class="row-separator"></div>
+            </div>
+
+            <label>
+                If you wish to email someone an invitation to join your group, please fill out their name and email address.  This is optional, and you will be able to invite additional people later.
+            </label>
+
+            <div class="instructions">
+                An email will be sent inviting them to join you.  Your group
+                is private and no one may join it without an invitation.  For future reference, your group page contains a Members button that can be used to send out more invitations.
+            </div>
+
+            <label for="memberName">Name:</label>
+            <input id="memberName" type="text" ng-model="invitedGroupMember.name" maxLength="80" width="30"/>
+            <label for="emailAddress">Email Address:</label>
+            <input id="emailAddress" type="text" ng-model="invitedGroupMember.email" maxLength="80" width="30"/>
+        </form>
+
+        <button ng-click="save()" class="btn btn-lg btn-primary">Continue</button>
+    </div>
+</div>
+<app-loading ng-show="loading"></app-loading>

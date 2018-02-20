@@ -1,0 +1,33 @@
+<div class="devotionContainer maintainOrganization">
+    <app-loading loading="loading"></app-loading>
+    <div ng-if="message.text" ng-click="tryAgain()" class="alert alert-{{message.type}}" role="alert" id="message">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        {{message.text}}</div>
+    <form ng-if="!loading" name="organizationForm" novalidate>
+        <h1>Organization Administration</h1>
+        <div ng-if="userInfo.account.siteAdmin" class="">
+            <label for="name">Name</label>
+            <input id="name" auto-focus type="text" ng-model="organization.name" maxlength="80" size="30"/>
+            <button id="saveButton" type="submit" ng-click="save()" class="btn btn-primary">Save</button>
+            <button id="cancelButton" type="button" ng-click="cancel()" class="btn btn-secondary">Cancel</button>
+        </div>
+
+        <div ng-if="organization.key || userInfo.account.adminOrganizationKey" >
+                <h2>Admin Users</h2>
+                <button id="addAccountButton" type="button" ng-click="addAccount()" class="btn btn-secondary pull-right"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Account</button>
+            <div class="row row-grid-header">
+                <span class="col-xs-6 col-sm-4">Name</span>
+                <span class="col-xs-5 col-sm-4">Email Address</span>
+                <span class="hidden-xs col-sm-4">Status</span>
+                <!--<span class="col-xs-1 col-sm-1"></span>-->
+            </div>
+            <div class="row row-grid" ng-repeat="account in accounts | orderBy: 'name' track by account.key">
+                <span class="col-xs-6 col-sm-4">{{account.name}}</span>
+                <span class="col-xs-5 col-sm-4">{{account.email}}</span>
+                <span class="hidden-xs col-sm-4">{{account.confirmed ? 'Active' : ''}}</span>
+                <!--<span class="col-xs-1 col-sm-1"><a href="javascript:void(0)"><span class="glyphicon glyphicon-pencil" title="Edit"></span></a></span>-->
+            </div>
+        </div>
+   </form>
+</div>
+

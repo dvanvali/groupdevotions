@@ -1,0 +1,35 @@
+<div class="home devotionContainer">
+    <div class="tag-line">
+        A safe place to share your devotional time with other believers in Jesus in a private group setting.
+    </div>
+
+    <div class="home-features">
+        <div class="home-feature">
+            <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+            Subscribe to daily devotionals.
+        </div>
+
+        <div class="home-feature">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            Form your own private group.  Postings will only be visible to the members you invite.
+        </div>
+
+        <div class="home-feature">
+            <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+            Keep a private journal of your daily insights.
+        </div>
+    </div>
+
+    <div class="study-tag-line">
+        If you <a ng-click="login()">create a free account</a>, you can subscribe to the following studies:
+    </div>
+
+    <button class="btn btn-lg" ng-if="!loading && !studies" ng-click="loadStudies()">View Studies</button>
+
+    <app-loading loading="loading"></app-loading>
+
+    <div class="study-row" ng-repeat="study in studies">
+        <div><span class="study-title">{{study.title}}</span><span class="study-author" ng-if="study.author"> by {{study.author}}</span></div>
+        <div class="study-purpose">{{study.purpose}}</div>
+    </div>
+</div>

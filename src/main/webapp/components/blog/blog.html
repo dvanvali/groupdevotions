@@ -1,0 +1,103 @@
+<div ng-if="message" class="alert alert-{{message.type}}" role="alert" id="message">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    {{message.text}}
+</div>
+<div class="devotionContainer" when-scrolled="loadMore()">
+    <div style="position: relative;"><span ng-if="groupName" class="lessonTitle">{{groupName}}</span>
+    </div>
+    <div class="halfEm"></div>
+    <div ng-if="instructions" class="instructions">{{instructions}}</div>
+    <div class="halfEm"></div>
+    <span ng-repeat="activity in activities track by activity.groupMemberKey" class="blogGroupMemberContainer"
+            data-toggle="modal" data-target="#memberDetailDialog" title="{{activity.tooltip}}">
+      <span ng-click="loadGroupMemberData(activity)"><img src="images/{{activity.image}}.png" style="height: 16px !important; width: 16px !important" alt="{{activity.image}}"/> <a>{{activity.name}}</a></span>
+    </span>
+    <button ng-click="editMembers()" ng-if="myGroupMember.groupAdmin" class="btn btn-sm" id="membersButton"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Members</button>
+    <div class="modal fade" id="memberDetailDialog" tabindex="-1" role="dialog" aria-labelledby="memberDetailDialog"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{groupMember.name}}</h4>
+                </div>
+                <div class="modal-body">
+                    <span ng-if="groupMember.privacy">This group member's information is not available.  Members can choose to make their contact information available through the settings.</span>
+                    <table ng-if="!groupMember.privacy">
+                        <tr>
+                            <td class="memberDetailLabel">Email Address:</td>
+                            <td class="memberDetailValue">{{groupMember.email}}</td>
+                        </tr>
+                        <tr>
+                            <td class="memberDetailLabel">Phone:</td>
+                            <td class="memberDetailValue">{{groupMember.phone}} <span class="memberDetailValue"
+                                                                                      ng-if="groupMember.acceptTexts">Texts Are Ok</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="halfEm"></div>
+    <form name="forms.commentForm">
+        <div class="form-group">
+            <textarea class="form-control" ng-disabled="buttonsDisabled" ng-show="mode == COMMENTMODE" ng-model="comment.value" auto-focus
+                      id="commentTextArea"/>
+            <button ng-click="commentOn()" ng-disabled="buttonsDisabled" ng-if="mode == VIEW" id="commentButton"
+                    class="btn btn-lg btn-primary my-btn">Comment
+            </button>
+            <button ng-click="saveComment()" ng-disabled="buttonsDisabled"
+                    ng-if="mode == COMMENTMODE" id="saveCommentButton"
+                    class="btn btn-lg btn-primary my-btn">Post to Group
+            </button>
+            <button ng-click="cancelComment()" ng-disabled="buttonsDisabled" ng-if="mode == COMMENTMODE"
+                    id="cancelCommentButton"
+                    class="btn btn-lg my-btn">Cancel
+            </button>
+            <button ng-if="!userInfo.isDesktop && mode == VIEW" ng-click="displayJournal()" type="button" ng-disabled="buttonsDisabled"
+                    id="journalButtonBottom"
+                     class="btn btn-lg">View Your Journal</button>
+        </div>
+    </form>
+    <div class="oneEm"></div>
+    <div ng-repeat="groupBlog in groupBlogs track by groupBlog.blogDate">
+        <div class="pageSubheading">
+            {{groupBlog.blogDateDisplay}}
+        </div>
+
+        <div ng-repeat="blogEntry in groupBlog.blogEntries.slice().reverse() track by blogEntry.postedOnFullDateTime+blogEntry.groupMemberKey">
+            <div class="blogPanel" ng-if="blogEntry.mode == VIEW">
+                <p ng-bind-html="blogEntry.htmlContent"></p>
+
+                <div>
+                    <span class="blogName"> -- {{blogEntry.name}} </span><span class="blogDateTime">{{blogEntry.formattedPostedOn}}</span>
+                    <span ng-if="blogEntry.modifiable" class="leftRightMargin"> </span>
+                    <a ng-if="blogEntry.modifiable && !buttonsDisabled" ng-click="editBlog(groupBlog, blogEntry)" class="leftRightMargin"
+                       id="blogEntryEdit">Edit</a>
+                    <a ng-if="blogEntry.modifiable && !buttonsDisabled" ng-click="deleteBlog(groupBlog, blogEntry)" class="leftRightMargin"
+                       id="blogEntryDelete">Delete</a>
+                </div>
+            </div>
+            <form>
+                <div class="form-group">
+                    <textarea class="form-control" ng-show="blogEntry.mode == COMMENTMODE" ng-model="blogEntry.content"
+                              ng-disabled="buttonsDisabled" auto-focus id="blogEditTextArea"/>
+                    <button ng-click="saveEditBlog(groupBlog, blogEntry)" ng-disabled="buttonsDisabled"
+                            ng-if="blogEntry.mode == COMMENTMODE" id="saveBlogEditButton"
+                            class="btn btn-lg btn-primary my-btn">Save
+                    </button>
+                    <button ng-click="cancelEditBlog(blogEntry)" ng-disabled="buttonsDisabled"
+                            ng-if="blogEntry.mode == COMMENTMODE" id="cancelBlogEditButton"
+                            class="btn btn-lg my-btn">Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="oneEm"></div>
+    </div>
+</div>
+
+<app-loading loading="loading">Loading data...</app-loading>

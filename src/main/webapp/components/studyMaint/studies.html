@@ -1,0 +1,28 @@
+<h1>Maintain Bible Studies</h1>
+<div ng-if="message.text" ng-click="tryAgain()" class="alert alert-{{message.type}}" role="alert" id="message">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  {{message.text}}</div>
+<div>
+  <div ng-if="studies" class="devotionContainer">
+    <label for="recentFilter" class="checkbox-inline filter"><input id="recentFilter" type="checkbox" ng-model="settings.studyFilter" ng-value="true"> Only Show Next Two Weeks</label>
+    <form name="forms.journalForm">
+    <div class="well well-sm" ng-repeat="study in studies">
+      <span class="pageSubheading">{{study.title}}</span> <button ng-if="userInfo.account.adminOrganizationKey || userInfo.account.siteAdmin" ng-click="editStudy(study)" class="btn btn-sm pull-right editButton"><span class="glyphicon glyphicon-pencil" title="Edit"></span> Edit Study</button>
+      <div ng-if="study.studyType !== 'RSS' && study.studyType !== 'BIBLE'">
+        <button ng-click="addLessonInfo(study)" class="btn btn-lg btn-primary addLesson"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add New Lesson</button>
+      </div>
+      <div ng-if="study.studyType !== 'RSS' && study.studyType !== 'BIBLE'" class="xwell xwell-sm" ng-repeat="lessonInfo in study.studyLessonInfos | filter:filterRecentItems | orderBy:'month ? month*31+day : $index'">
+        <span><span ng-if="study.studyType === 'DAILY'">{{lessonInfo.month}}/{{lessonInfo.day}} </span>{{lessonInfo.title}}</span> <button ng-click="editLessonInfo(lessonInfo)" class="btn btn-sm editLesson"><span class="glyphicon glyphicon-pencil" title="Edit"></span> Edit</button>
+      </div>
+      <span class="">Accountability Questions</span>
+          <button ng-if="study.accountabilityLessonKey" ng-click="editAccountability(study)" class="btn btn-sm editAccountability"><span class="glyphicon glyphicon-pencil" title="Edit"></span> Edit</button>
+          <button ng-if="!study.accountabilityLessonKey" ng-click="editAccountability(study)" class="btn btn-sm addAccountability"><span class="glyphicon glyphicon-plus-sign" title="Edit"></span> Add</button>
+    </div>
+    </form>
+  </div>
+  <button ng-if="userInfo.account.siteAdmin || userInfo.account.createStudies || userInfo.account.adminOrganizationKey"
+          id="addStudy" ng-click="editStudy({})"
+          class="pull-right btn btn-sm btn-secondary">
+    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add New Study</button>
+</div>
+<div ng-show="loading">Loading data...</div>

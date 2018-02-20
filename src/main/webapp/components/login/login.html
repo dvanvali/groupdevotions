@@ -1,0 +1,107 @@
+<div class="login" width="100%" style="text-align: center;">
+    <div class="loginBox" ng-if="showLogin">
+        <h3 id="loginHeading" class="login-heading">Please sign in</h3>
+
+        <div ng-if="message" class="alert alert-{{message.type}}" role="alert" id="message">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{message.text}}
+        </div>
+        <div class="input-row">
+            <input id="email" ng-model="form.signInEmail" type="text" class="form-control" placeholder="Email address" maxLength="35"
+                   auto-focus/>
+        </div>
+        <div class="input-row">
+            <input id="password" ng-model="form.signInPassword" id="loginPassword" type="password" class="form-control" placeholder="Password"
+                   maxLength="35"/>
+        </div>
+        <button name="signInButton" style="margin-top: 10px;" class="btn btn-lg btn-primary btn-block"
+                ng-click="login()" ng-disabled="isDisabled">Sign In
+        </button>
+        <div style="text-align: left;" class="login-instructions">
+            <input ng-model="form.rememberMe" ng-change="rememberMeChanged()" type="checkbox" ng-true-value="true" ng-false-value="false"/><span style="vertical-align: text-bottom"> Remember Email<a style="float: right" id="forgotLink" ng-click="displayForgot()">Forgot your password?</a></span>
+        </div>
+        <div ng-show="form.rememberMe" style="text-align: left;" id="stayLoggedInContainer" class="login-instructions">
+            <div class="oneEm"/>
+            <input ng-model="form.stayLoggedIn" type="checkbox" ng-true-value="true" ng-false-value="false"/><span style="vertical-align: text-bottom"> Stay Logged In</span>
+        </div>
+        <div class="halfEm"/>
+        <div style="text-align: center;">
+           New? <a class="link" id="newAccountLink" ng-click="displayCreate()">Create an account</a>
+        </div>
+        <div class="signin-hort-bar"/>
+        <div class="login-google">
+            Or
+            <div class="halfEm"/>
+            <button alt="Google" class="btn btn-lg btn-primary btn-block" ng-click="googleLogin()" ng-disabled="isDisabled"
+                    id="googleButton">Sign In with Google
+            </button>
+        </div>
+        <div class="halfEm"/>
+        <div style="text-align: center;">
+            New? <a class="link" href="https://www.google.com/accounts/NewAccount" target="_blank">Create a Google account</a>
+        </div>
+        <div class="halfEm"/>
+    </div>
+
+    <div class="loginBox" ng-if="showForgot">
+        <h3 id="forgotHeading" class="login-heading">Forgot Your Password</h3>
+
+        <div ng-if="message" class="alert alert-{{message.type}}" role="alert" id="messageForgot">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{message.text}}
+        </div>
+        <div>
+            <input id="forgotEmail" ng-model="form.signInEmail" type="text" class="form-control" placeholder="Email address" maxLength="35"
+                   auto-focus/>
+        </div>
+        <button name="sendForgotButton" style="margin-top: 10px;" class="btn btn-lg btn-primary btn-block"
+                ng-click="forgot()" ng-disabled="isDisabled" id="forgotButton">Send Reset Email
+        </button>
+        <button name="cancelForgotButton" style="margin-top: 10px;" class="btn btn-lg btn-block"
+                ng-click="cancelForgot()" ng-disabled="isDisabled" id="forgotCancel">Cancel
+        </button>
+        <div class="oneEm"/>
+    </div>
+
+    <div width="100%" class="loginBox" ng-show="showCreate">
+        <h3 id="createHeading" class="login-heading">Create Account</h3>
+
+        <div ng-if="message" class="alert alert-{{message.type}}" role="alert" id="messageCreate">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{message.text}}
+        </div>
+        <div class="input-row">
+            <input id="create-email" ng-model="form.signInEmail" type="text" class="form-control" placeholder="Email address" maxLength="35"
+                   auto-focus/>
+        </div>
+        <div class="input-row">
+            <input ng-model="form.name" type="text" class="form-control" placeholder="Name" maxLength="35"/>
+        </div>
+        <div class="input-row">
+            <input id="create-password" ng-model="form.signInPassword" type="password" class="form-control" placeholder="Password"
+                   maxLength="35"/>
+        </div>
+        <div>
+            <input ng-model="form.signInPassword2" type="password" class="form-control" placeholder="Password (again)"
+                   maxLength="35"/>
+        </div>
+        <!--<div class="g-recaptcha" data-sitekey="6LdJHRYTAAAAAMVa2u8NqvzdQRQfHso2kA3caylk"></div>-->
+        <div id="g-recaptcha"></div>
+        <div class="input-row">
+            <button class="btn btn-lg btn-primary btn-block createAccountButton"
+                ng-click="create()" ng-disabled="isDisabled" id="createButton">Create Account
+            </button>
+        </div>
+        <button class="btn btn-lg btn-block"
+                ng-click="cancelCreate()" ng-disabled="isDisabled" id="createCancel">Cancel
+        </button>
+        <div class="signin-hort-bar"/>
+        <div class="login-instructions">Or, if you prefer, you can use a Google account associated with your email address:</div>
+        <div class="input-row">
+            <button alt="Create Google" class="btn btn-lg btn-primary btn-block" ng-click="createGoogleNew()" ng-disabled="isDisabled"
+                id="createNewGoogleButton">Create Google Account</button>
+        </div>
+        <button alt="Login Google" class="btn btn-lg btn-primary btn-block" ng-click="googleLogin()" ng-disabled="isDisabled"
+                id="createExistingGoogleButton">Use Existing Google Account</button>
+    </div>
+</div>

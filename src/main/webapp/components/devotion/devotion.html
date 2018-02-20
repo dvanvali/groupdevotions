@@ -1,0 +1,149 @@
+<div ng-if="message.text" ng-click="tryAgain()" class="alert alert-{{message.type}}" role="alert" id="message">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    {{message.text}}
+</div>
+<div class="devotionContainer devotion">
+    <form id="topOfPage" name="answerForm">
+        <div ng-repeat="studyLesson in devotionData.studyLessons">
+            <div ng-if="!studyLesson.accountabilityLesson" class="lessonTiming">{{studyLesson.devotionPageTagLine}}
+            </div>
+            <div ng-if="!studyLesson.accountabilityLesson" class="lessonTitle">{{studyLesson.title}}</div>
+            <div ng-if="!studyLesson.accountabilityLesson && studyLesson.author" class="devotionAuthor">by
+                {{studyLesson.author}}
+            </div>
+            <div ng-repeat="section in studyLesson.studySections" class="lessonSection {{section.type}}">
+                <div>
+                    <p>
+                        <span ng-bind-html="section.content"></span>
+                        <select ng-if="section.type == 'SCRIPTURE_TO_LOAD'" ng-change="versionChange(section)" ng-model="section.version" class="versionSelect">
+                            <option value="asv">ASV</option>
+                            <option value="amp">AMP</option>
+                            <option value="basicenglish">BBE</option>
+                            <option value="cev">CEV</option>
+                            <option value="darby">DBY</option>
+                            <option value="gntd">GNTD</option>
+                            <option value="esv">ESV</option>
+                            <option value="kjv">KJV</option>
+                            <option value="akjv">AKJV</option>
+                            <option value="nasb">NASB</option>
+                            <option value="msg">MSG</option>
+                            <option value="ylt">YLT</option>
+                            <option value="web">WEB</option>
+                            <option value="wb">WB</option>
+                        </select>
+                    </p>
+                    <div ng-if="section.type == 'TEXT_QUESTION' || section.type == 'YESNO_QUESTION'"
+                         class="answerContainer">
+                        <textarea rows="6" class="questionTextbox" ng-if="section.type == 'TEXT_QUESTION'"
+                                  ng-model="section.answer"/>
+                    <span ng-if="section.type == 'YESNO_QUESTION'">
+                        <input type="radio" ng-model="section.answer" value="Y"> Yes<br/>
+                        <input type="radio" ng-model="section.answer" value="N"> No
+                    </span>
+                    </div>
+                    <div ng-if="section.type == 'SCRIPTURE_TO_LOAD'">
+                        <app-loading loading="section.loading"></app-loading>
+                        <span ng-show="!section.loading" class="verse" data-ng-repeat="(key, verse) in section.bible.chapter">
+                            <span class="ref"><sup>{{verse.verse_nr}}</sup></span>{{verse.verse}}
+                        </span>
+                        <span ng-show="!section.loading">
+                            <span ng-repeat="passage in section.bible.passages" ng-bind-html="passage.text"></span>
+                        </span>
+                        <div class="copyright" ng-if="section.bible.passages[0].copyright">
+                            <span ng-bind-html="section.bible.passages[0].copyright"></span>
+                        </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="studyLesson.studyType == 'BIBLE' && !viewingPrevious" id="{{studyLesson.studyKey}}">
+                <button ng-if="!studyLesson.dailyReadingStartsEachMonth && !studyLesson.hideEmailReadingCompleteButton && !studyLesson.bibleReadingComplete" ng-click="readingComplete(studyLesson)" type="button" ng-disabled="buttonsDisabled"
+                        id="completeButton"
+                        class="btn btn-lg btn-primary">Reading Completed
+                </button>
+                <button ng-click="makeSettingsVisible(studyLesson.studyKey)" type="button" ng-disabled="buttonsDisabled" ng-if="!readingSettingsVisible" class="btn btn-lg">
+                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </button>
+                <div ng-if="readingSettingsVisible" class="devotionContainer" width="100%">
+                    <div class="devotionContainer" width="100%">
+                        <div class="oneEm"/>
+                        <app-bible-reading-settings group-member="groupMember" study-key="{{studyLesson.studyKey}}" message="message"></app-bible-reading-settings>
+                        <div class="oneEm"/>
+                        <button ng-click="saveSettings(true)" type="button" ng-disabled="buttonsDisabled" class="btn btn-lg btn-primary">Save Settings</button>
+                        <button ng-click="cancelSettings(true)" type="button" ng-disabled="buttonsDisabled" class="btn btn-lg">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <p ng-if="!studyLesson.accountabilityLesson" ng-bind-html="studyLesson.copyright"
+               class="lessonSection copyright"></p>
+
+            <div ng-if="!studyLesson.accountabilityLesson" class="horizontalBar"/>
+            <div ng-if="message.text" ng-click="tryAgain()" class="alert alert-{{message.type}}" role="alert" id="messageBottom">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                {{message.text}}
+            </div>
+        </div>
+    </form>
+
+    <div ng-if="accountabilitySettingsVisible && devotionHasQuestions" id="settingsContainer" class="devotionContainer" width="100%">
+        <div class="devotionContainer" width="100%">
+            <div class="oneEm"/>
+            <div class="fieldLabel">Email accountability answers to:</div>
+            <div class="halfEm"/>
+            <div style="margin-bottom: 5px; margin-left: 10px;"
+                 ng-repeat="email in accountabilityEmails track by email.index">
+                <span class="fieldLabel">Email Address: </span><input ng-change="emailChanged()"
+                                                                      ng-model="email.address" visibleLength="25"/>
+                <!--button ng-if="groupMemberEmails" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                <ul id="email-dropdown-menu" class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li ng-repeat="groupMemberEmail in groupMemberEmails" class="input-lg"><a href="#" ng-click="email = groupMemberEmail">{{groupMemberEmail}}</a></li>
+                </ul-->
+                <a class="link" ng-show="email.address" ng-click="clearEmail(email)">Remove</a>
+            </div>
+            <div class="oneEm"/>
+            <div>
+                <span class="fieldLabel">Do you want to receive a copy of your accountability emails? </span>
+                <br />
+                <input type="radio" class="fieldLabel" ng-model="groupMember.sendAccountabilityEmailsToMe"
+                       ng-value="true" id="emailsToMeYes">Yes
+                <input type="radio" class="fieldLabel" ng-model="groupMember.sendAccountabilityEmailsToMe"
+                       ng-value="false" id="emailsToMeNo">No
+            </div>
+            <div class="oneEm"/>
+            <button ng-click="saveSettings()" type="button" ng-disabled="buttonsDisabled" id="saveSettingsButton"
+                    class="btn btn-lg btn-primary">Save Settings
+            </button>
+            <button ng-click="cancelSettings()" type="button" ng-disabled="buttonsDisabled"
+                    id="cancelSettingsButton"
+                    class="btn btn-lg">Cancel
+            </button>
+        </div>
+    </div>
+
+    <button ng-click="save()" type="button" ng-disabled="buttonsDisabled"
+            ng-if="!hideEmailReadingCompleteButton && devotionHasQuestions && devotionData.accountabilityConfigured && !accountabilitySettingsVisible"
+            id="saveButton"
+            class="btn btn-lg btn-primary">Email Answers
+    </button>
+    <button ng-click="makeSettingsVisible()" type="button" ng-disabled="buttonsDisabled"
+            ng-if="devotionHasQuestions && !accountabilitySettingsVisible" id="accountabilitySettingsButton"
+            class="btn btn-lg"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><span
+            ng-if="!devotionData.accountabilityConfigured"> Setup Accountability</span></span></button>
+    <button ng-if="devotionData.studyLessons" ng-click="previousLesson()"
+            type="button" ng-disabled="buttonsDisabled"
+            class="btn btn-lg">View Previous Lesson
+    </button>
+    <button ng-click="todaysLesson()" ng-if="devotionData.studyLessons && viewingPrevious"
+            type="button" ng-disabled="buttonsDisabled"
+            class="btn btn-lg">View Today's Lesson
+    </button>
+    <button ng-if="devotionData.studyLessons && !userInfo.isDesktop && !accountabilitySettingsVisible && (!answserForm || !answerForm.$dirty)" ng-click="displayBlog()"
+            type="button" ng-disabled="buttonsDisabled"
+            id="groupButtonBottom"
+            class="btn btn-lg">View Group Comments
+    </button>
+
+    <div aria-hidden="true" class="halfEm" id="bottomOfPage"></div>
+    <app-loading loading="!devotionData.studyLessons"></app-loading>
+</div>

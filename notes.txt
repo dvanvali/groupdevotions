@@ -1,0 +1,7 @@
+
+npm install <module> --save-dev
+bower install <module> --save (or save-dev)
+
+
+dvanvalin@oke-dvanvalin-mb:~$ gcloud init
+dvanvalin@oke-dvanvalin-mb:~$ gcloud components install app-engine-java

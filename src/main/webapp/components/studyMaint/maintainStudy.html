@@ -1,0 +1,63 @@
+<div class="devotionContainer">
+    <div ng-if="message.text" ng-click="tryAgain()" class="alert alert-{{message.type}}" role="alert" id="message">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        {{message.text}}</div>
+    <form name="studyForm" novalidate>
+    <h1>Maintain Study</h1>
+    <h2>Please describe your study:</h2>
+    <div class="">
+        <label for="title">Title (2-5 words)</label>
+        <input id="title" auto-focus type="text" ng-model="study.title" maxlength="80" size="30"/>
+    </div>
+    <div class="">
+        <label for="author">Author (optional)</label>
+        <input id="author" type="text" maxlength="80" size="30" ng-model="study.author"/>
+    </div>
+    <div class="">
+        <label for="purpose">Purpose (1-5 sentences)</label>
+        <textarea id="purpose" class="form-control" ng-model="study.purpose"></textarea>
+    </div>
+    <div class="">
+        <label for="copyright">Copyright Notice (shows at the bottom of every lesson)</label>
+        <textarea id="copyright" class="form-control" ng-model="study.copyright"></textarea>
+    </div>
+    <div class="">
+        <label for="studyType">Study Type?</label>
+        <select id="studyType" ng-model="study.studyType">
+            <option value=""></option>
+            <option value="SERIES">Study Series</option>
+            <option value="DAILY">Daily For One Year</option>
+            <option value="BIBLE">Bible Reading Plan</option>
+            <option value="RSS">RSS Feed</option>
+        </select>
+    </div>
+    <div ng-if="study.studyType == 'RSS'" class="">
+        <label for="rssUrl">RSS URL</label>
+        <input id="rssUrl" type="text" size="30" maxlength="500" ng-model="study.rssUrl"/>
+    </div>
+    <div ng-if="study.studyType == 'BIBLE'" class="">
+        <div>
+            <label for="dailyReadingStartingDate">Start Bible Plan on what month/day (MM/DD)? (not required)</label>
+            <input id="dailyReadingStartingDate" type="text" size="5" maxlength="5" ng-model="study.dailyReadingStartingMonthDay"/>
+        </div>
+        <div>
+            <label>Plan starts new each month (no progress tracking)?</label>
+            <input id="dailyReadingStartsEachMonthYes" type="radio" ng-model="study.dailyReadingStartsEachMonth" ng-value="true"/><label for="dailyReadingStartsEachMonthYes"> Yes</label>
+            <input id="dailyReadingStartsEachMonthNo" type="radio" ng-model="study.dailyReadingStartsEachMonth" ng-value="false"/><label for="dailyReadingStartsEachMonthNo"> No</label>
+        </div>
+        <div>
+            <label for="dailyReadingList">Bible Passages (one line per day, separate passages on same day with ;)</label>
+        </div>
+        <div>
+            <textarea id="dailyReadingList" class="form-control" type="text" ng-model="study.dailyReadingList"/>
+        </div>
+    </div>
+    <div class="">
+        <label>Do you want this study available to the public?</label>
+        <input id="publicStudyYes" type="radio" ng-model="study.publicStudy" ng-value="true"/><label for="publicStudyYes"> Yes</label>
+        <input id="publicStudyNo" type="radio" ng-model="study.publicStudy" ng-value="false"/><label for="publicStudyNo"> No</label>
+    </div>
+    <button id='saveButton' ng-click="save()" class="btn btn-lg btn-primary">Save</button>
+    <button id='cancelButton' ng-click="cancel()" class="btn btn-lg">Cancel</button>
+    </form>
+</div>

@@ -1,0 +1,35 @@
+<div ng-if="settings.message.text" ng-click="tryAgain()" class="alert alert-{{settings.message.type}}" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    {{settings.message.text}}</div>
+<div ng-if="!settings.loaded">Loading settings...</div>
+<div ng-if="settings.loaded">
+    <div>
+        <label for="version">Bible version:</label>
+    </div>
+    <select id="version" ng-model="settings.groupMember.bibleReadingVersion">
+        <option value="asv">American Standard Version</option>
+        <option value="amp">Amplified Version</option>
+        <option value="basicenglish">Basic English Bible</option>
+        <option value="cev">Contemporary English Version</option>
+        <option value="darby">Darby</option>
+        <option value="esv">English Standard Version</option>
+        <option value="gntd">Good News Translation</option>
+        <option value="kjv">King James Version</option>
+        <option value="akjv">KJV Easy Read</option>
+        <option value="msg">The Message</option>
+        <option value="nasb">New American Standard</option>
+        <option value="ylt">Young's Literal Translation</option>
+        <option value="web">World English Bible</option>
+        <option value="wb">Webster's Bible</option>
+    </select>
+    <div ng-if="!settings.dailyReadingStartsEachMonth">
+        <div>
+            <label for="completed">Select your progress so far:</label>
+        </div>
+        <select id="completed" ng-model="settings.groupMember.lastCompletedBibleReadingIndex">
+            <option value="-1">-- None Completed --</option>
+            <option ng-repeat="item in settings.readingList" value="{{$index}}">{{item}}</option>
+        </select>
+    </div>
+</div>
+

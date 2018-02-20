@@ -1,0 +1,30 @@
+<table style="min-width: 600px; table-layout: fixed" width="100%">
+    <tr>
+        <td style="vertical-align: top" width="50%" >
+            <div ng-controller="DevotionCtrl">
+                <div ng-include="'components/devotion/devotion.html'"></div>
+            </div>
+        </td>
+        <td style="vertical-align: top" width="50%">
+            <div role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a ng-click="showBlog()" aria-controls="group" role="tab" data-toggle="tab"><span style="font-weight: bold;">Group</span></a></li>
+                    <li role="presentation"><a ng-click="showJournal()" aria-controls="journal" role="tab" data-toggle="tab"><span style="font-weight: bold;">Journal</span></a></li>
+                </ul>
+
+                <div style="margin-top: -5px !important;" class="tab-content">
+                    <div class="tab-pane active" style="border-left: solid 1px #d1d1d1;" ng-show="journalVisible" role="tabpanel" id="journal" ng-controller="JournalCtrl">
+                        <div class="devotionColumn">
+                        <div ng-include="'components/journal/journal.html'"></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane active" style="border-left: solid 1px #d1d1d1;" ng-show="blogVisible" role="tabpanel" id="blog" ng-controller="BlogCtrl">
+                        <div class="devotionColumn">
+                        <div ng-include="'components/blog/blog.html'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>

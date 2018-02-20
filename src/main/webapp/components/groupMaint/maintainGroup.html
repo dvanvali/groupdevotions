@@ -1,0 +1,48 @@
+<!--
+	@Index public String studyKey;
+	@Type(Text.class) public String description;
+	@Type(Text.class) public String blogInstructions;
+	public String inviteEmailSubject;
+	@Type(Text.class) public String inviteEmailBody;
+-->
+
+<div class="devotionContainer">
+    <div ng-if="message.text" ng-click="tryAgain()" class="alert alert-{{message.type}}" role="alert" id="message">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        {{message.text}}</div>
+    <form name="studyForm" novalidate>
+        <h1>Maintain Group</h1>
+        <h2>Please describe your group:</h2>
+        <div class="">
+            <label for="title">Description (2-5 words)</label>
+            <input id="title" auto-focus type="text" ng-model="group.description" maxlength="80" size="30"/>
+        </div>
+        <div class="">
+            <label for="study">Study</label>
+            <span ng-if="studyLoading">Loading...</span>
+            <select ng-if="!studyLoading" id="study" ng-model="group.studyKey">
+                <option value=""></option>
+                <option ng-repeat="study in studies" value="{{study.key}}">{{study.title}}</option>
+            </select>
+        </div>
+        <div class="">
+            <label for="blog-instructions">Blog Instructions (show on the group blog to members)</label>
+            <input id="blog-instructions" type="text" maxlength="80" size="30" ng-model="group.blogInstructions"/>
+        </div>
+        <div class="">
+            <label for="invite-email-subject">Email Invitation Subject (required if you want invitation emails sent)</label>
+            <input id="invite-email-subject" type="text" maxlength="80" size="30" ng-model="group.inviteEmailSubject"/>
+        </div>
+        <div class="">
+            <label for="invite-email-body">Email Invitation Body</label>
+            <textarea id="invite-email-body" class="form-control" ng-model="group.inviteEmailBody"></textarea>
+        </div>
+        <div ng-if="group.ownerOrganizationKey" class="">
+            <label for="accountabilityEmail">Default Accountability Email</label>
+            <input id="accountabilityEmail" type="text" ng-model="group.defaultOrgAccountabilityEmail" maxlength="80" size="30"/>
+        </div>
+
+        <button id='saveButton' ng-click="save()" class="btn btn-lg btn-primary">Save</button>
+        <button id='cancelButton' ng-click="cancel()" class="btn btn-lg">Cancel</button>
+    </form>
+</div>

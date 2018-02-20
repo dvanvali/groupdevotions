@@ -1,0 +1,15 @@
+<div class="terms">
+    <div ng-if="message" class="alert alert-{{message.type}}" role="alert" id="message">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        {{message.text}}</div>
+    <div class="lessonTitle">Terms Of Service</div>
+    <div class="horizontalBar"></div>
+    <div class="DIALOG"><p ng-bind-html="terms"></p></div>
+    <div ng-if="message" class="alert alert-{{message.type}}" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        {{message.text}}</div>
+    <button ng-click="agree()" ng-disabled="buttonsDisabled" id="agreeButton"
+            class="btn btn-sm btn-primary">I Agree</button>
+    <button ng-click="disagree()" ng-disabled="buttonsDisabled" id="disagreeButton"
+            class="btn btn-sm btn-default">I Disagree</button>
+</div>

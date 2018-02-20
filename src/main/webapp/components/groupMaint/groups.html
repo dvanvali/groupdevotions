@@ -1,0 +1,21 @@
+<div ng-if="message.text" ng-click="tryAgain()" class="alert alert-{{message.type}}" role="alert" id="message">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    {{message.text}}</div>
+<div ng-show="loading">Loading data...</div>
+
+<div ng-if="!loading" class="groups">
+    <div>
+        <h1>Groups</h1>
+        <button role="navigation" id='addGroup' ng-click="editGroup({})" class="pull-right btn btn-sm btn-secondary"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add New Group</button>
+    </div>
+
+    <div class="row row-grid-header">
+        <span class="col-xs-11">Name</span>
+        <span class="col-xs-1"></span>
+    </div>
+
+    <div ng-click="editGroupMembers(group)" class="row row-grid" ng-repeat="group in groups | orderBy: 'description'">
+        <span class="col-xs-11">{{group.description}}</span>
+        <span id='editGroup' class="col-xs-1 pull-right"><a href="javascript:void(0)"><span class="glyphicon glyphicon-pencil" title="Edit"></span></a></span>
+    </div>
+</div>

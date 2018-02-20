@@ -1,0 +1,24 @@
+<div class="organizations devotionContainer">
+    <div ng-if="!loading">
+        <h1>Maintain Organizations</h1>
+        <button id="addButton" ng-click="edit({})" class="btn btn-md btn-secondary pull-right"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Organization</button>
+    </div>
+
+    <div ng-if="message.text" ng-click="tryAgain()" class="alert alert-{{message.type}}" role="alert" id="message">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        {{message.text}}
+    </div>
+
+    <div ng-if="!loading">
+        <div class="row row-grid-header">
+            <span class="col-xs-11 col-sm-11">Name</span>
+            <span class="col-xs-1 col-sm-1"></span>
+        </div>
+
+        <div ng-click="edit(organization)" class="row row-grid" ng-repeat="organization in organizations">
+            <span class="col-xs-11">{{organization.name}}</span>
+            <a class="col-xs-1 pull-right" id="editButton"><span class="glyphicon glyphicon-pencil" title="Edit"></span></a>
+        </div>
+    </div>
+    <app-loading loading="loading"></app-loading>
+</div>

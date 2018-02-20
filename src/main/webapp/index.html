@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>GroupDevotions.com</title>
+    <link rel="icon" type="image/png" href="/favicon-3.png">
+    <meta name="description" content="Connect with friends in a private small group by doing daily devotions together and posting thoughts, prayers and concerns.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.css?v=@@version">
+    <link rel="stylesheet" href="css/main.css?v=@@version">
+    <link rel="stylesheet" href="css/bootstrap.css?v=@@version">
+    <link rel="stylesheet" href="css/app.css?v=@@version"/>
+    <script src="scripts/libraries.min.js?v=@@version"></script>
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div class="headerContainer" ng-controller="HeadingCtrl">
+
+    <nav ng-cloak ng-if="!userInfo.isSignedIn" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div>
+                <a ng-click="bannerClick()" class="navbar-brand"><img src="/favicon-3.png"/><span
+                        style="color: #707070;"> <span style="font-weight: bold">Group</span>Devotions</span></a>
+            </div>
+
+            <div ng-show="loginShowing" style="float: right" class="navbar-text navbar-right">
+                <a ng-if="!checkingLogin" ng-click="login()" id="loginButton" class="navbar-link">Login</a>
+                <span ng-if="checkingLogin" class="navbar-link"><img class="rotate" id="login-loading" src="/images/load.svg"> Loading...</span>
+                <a ng-click="contactUs()" id="contactUsButton" class="navbar-link"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                   <span class="sr-only"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Desktop/tablet menu -->
+    <nav ng-cloak ng-if="userInfo.isSignedIn && (!tinyViewport || userInfo.isDesktop)"
+         class="nav navbar-default navbar-fixed-top" role="navigation">
+        <ul style="min-width: {{tabMinWidth}}px; " class="nav nav-tabs">
+            <li ng-click="bannerClick()">
+                <a >
+                <img src="/favicon-3.png"/><span style="color: #707070;"> <span style="font-weight: bold">Group</span>Devotions</span></a>
+            </li>
+            <li ng-if="showDevotionMenuItem()" ng-click="devotion()" ng-if="!userInfo.isDesktop" class="remove-tab-margin" id="devotionButton">
+                <a ><span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+                    <span class="hidden-xs"> Devotion</span><span class="sr-only">(current)</span>
+                </a></li>
+            <li ng-if="showBlogMenuItem()" ng-click="blog()" ng-if="!userInfo.isDesktop" class="remove-tab-margin" id="blogButton">
+                <a >
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span><span
+                    class="hidden-xs"> Group</span>
+                </a></li>
+            <li ng-click="journal()" ng-if="!userInfo.isDesktop" class="remove-tab-margin" id="journalButton">
+                <a >
+                <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                    <span class="hidden-xs"> Journal</span>
+                </a></li>
+            <li ng-click="logout()" class="remove-tab-margin pull-right" id="logoutButton">
+                <a ><span aria-hidden="true"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                    <span class="hidden-xs"> Log Out</span></span>
+                </a></li>
+            <li class="dropdown remove-tab-margin pull-right">
+                <a id="dropdown" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false">
+                    <span class="">Menu<span class="caret"></span></span></a>
+                <button class="visible-xs navbar-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                <ul class="dropdown-menu">
+                    <li ng-if="showDevotionMenuItem()" ng-click="devotion()" id="devotionMenuItem">
+                        <a ><span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+                            Devotion<span class="sr-only">(current)</span>
+                        </a></li>
+                    <li ng-if="showBlogMenuItem()" ng-click="blog()" id="blogMenuItem">
+                        <a ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            Group</a></li>
+                    <li ng-click="journal()" id="journalMenuItem">
+                        <a ><span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                            Journal</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li ng-click="settings()" id="settingsMenuItem">
+                        <a><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                            Settings</a></li>
+                    <li ng-click="contactUs()" id="contactUsMenuItem">
+                        <a><span aria-hidden="true"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                        Contact Us</span></a></li>
+                    <li ng-click="logout()" id="logoutMenuItem">
+                        <a><span aria-hidden="true"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        Log Out</span></a></li>
+                    <li role="separator" class="divider"></li>
+                    <li ng-if="showGroupsMenuItem()" ng-click="groups()" id="groupsMenuItem">
+                        <a>Maintain Groups</a></li>
+                    <li ng-if="showStudiesMenuItem()" ng-click="studies()" id="studiesMenuItem">
+                        <a>Maintain Studies</a></li>
+                    <li ng-if="showOrganizationsMenuItem()" ng-click="organizations()" id="organizationsMenuItem">
+                        <a>Maintain Organizations</a></li>
+                    <li ng-if="showAdministrationMenuItem()" ng-click="administration()" id="administrationMenuItem">
+                        <a>Administration</a></li>
+                </ul>
+            </li>
+            <li ng-click="desktop()"  ng-if="userInfo.isDesktop" class="remove-tab-margin pull-right" id="desktopButton">
+                <a ><span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+                    <span class="hidden-xs"> Devotion/Group</span>
+                </a></li>
+        </ul>
+    </nav>
+
+    <!-- Phone menu -->
+    <nav ng-cloak ng-if="userInfo.isSignedIn && tinyViewport && !userInfo.isDesktop" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button id="toggleButton" type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#small-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a ng-click="bannerClick()" style="margin-bottom: -8px;" class="navbar-brand"><img src="/favicon-3.png"/><span
+                        style="color: #707070;"> <span style="font-weight: bold">Group</span>Devotions</span></a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="small-navbar">
+                <ul class="nav navbar-nav">
+                    <li ng-if="showDevotionMenuItem()" ng-click="devotion()" id="devotionMenuItem">
+                        <a ><span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+                        Devotion<span class="sr-only">(current)</span>
+                        </a></li>
+                    <li ng-if="showBlogMenuItem()" ng-click="blog()" id="blogMenuItem">
+                        <a ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        Group</a></li>
+                    <li ng-click="journal()" id="journalMenuItem">
+                        <a ><span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                        Journal</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li ng-click="settings()" id="settingsMenuItem">
+                        <a ><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        Settings</a></li>
+                    <li ng-click="contactUs()" id="contactUsMenuItem">
+                        <a><span aria-hidden="true"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                        Contact Us</span></a></li>
+                    <li ng-click="logout()" id="logoutMenuItem">
+                        <a ><span aria-hidden="true"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        Log Out</span></a></li>
+                    <li role="separator" class="divider"></li>
+                    <li ng-if="showGroupsMenuItem()" ng-click="groups()" id="groupsMenuItem">
+                        <a >Maintain Groups</a></li>
+                    <li ng-if="showStudiesMenuItem()" ng-click="studies()" id="studiesMenuItem">
+                        <a >Maintain Studies</a></li>
+                    <li ng-if="showOrganizationsMenuItem()" ng-click="organizations()" id="organizationsMenuItem">
+                        <a >Maintain Organizations</a></li>
+                    <li ng-if="showAdministrationMenuItem()" ng-click="administration()" id="administrationMenuItem">
+                        <a>Administration</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid viewContainer" ng-view></div>
+
+</div>
+
+<script src="scripts/templates.js?v=@@version"></script>
+<script src="scripts/app.js?v=@@version"></script>
+<script src="https://www.blueletterbible.org/scripts/blbToolTip/BLB_ScriptTagger-min.js" type="text/javascript"></script>
+<script src="https://d2ue49q0mum86x.cloudfront.net/include/fums.c.js"></script>
+<script>
+var onloadCallback = function() {
+};
+</script>
+<script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>
+<script type="text/javascript">
+    BLB.Tagger.Translation = 'NKJV';
+    BLB.Tagger.HyperLinks = 'none'; // 'all', 'none', 'hover'
+    BLB.Tagger.HideTanslationAbbrev = false;
+    BLB.Tagger.TargetNewWindow = true;
+    BLB.Tagger.Style = 'line'; // 'line' or 'par'
+</script>
+</body>
+</html>
