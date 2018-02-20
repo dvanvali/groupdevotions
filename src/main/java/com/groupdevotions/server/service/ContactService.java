@@ -1,8 +1,6 @@
 package com.groupdevotions.server.service;
 
 import com.google.inject.Inject;
-import com.groupdevotions.server.dao.*;
-import com.groupdevotions.server.logic.StudyLogicFactory;
 import com.groupdevotions.server.util.SharedUtils;
 import com.groupdevotions.shared.model.Config;
 import com.groupdevotions.shared.model.UserInfo;
@@ -47,8 +45,7 @@ public class ContactService {
             Session session = Session.getDefaultInstance(props, null);
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(config.fromNoReplyEmailAddr, config.fromNoReplyEmailAddrDesc));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("contactus@gmail.com"));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("contactus@yahoo.com"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(config.forwardContactUsEmailsTo));
             message.setSubject("Contact us request for " + config.siteUrl);
             String body = "Email: " + email + "\n";
             if (!SharedUtils.isEmpty(name)) {

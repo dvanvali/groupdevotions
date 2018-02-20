@@ -41,5 +41,7 @@ public class Config implements Serializable {
 	public boolean development = true;
 	public String fromNoReplyEmailAddr = "groupdevotions.noreply@gmail.com";
 	public String fromNoReplyEmailAddrDesc = "Group Devotions (Do not reply)";
+	public String bibleOrgApiKey = "fill me in";
+	public String forwardContactUsEmailsTo = "somewhere@gmail.com";
 }
 
