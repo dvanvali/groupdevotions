@@ -501,7 +501,7 @@ public class AccountService {
 			return "Please click the recaptcha checkbox.";
 		}
 		try {
-			boolean success = VerifyRecaptcha.verify(recaptcha);
+			boolean success = VerifyRecaptcha.verify(recaptcha, config.recaptchaSecret);
 			if (!success && !config.development) {
 				return "Your recaptcha response was not valid.  Please try again.";
 			}

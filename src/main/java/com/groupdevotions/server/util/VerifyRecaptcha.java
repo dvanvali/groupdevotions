@@ -16,10 +16,9 @@ import javax.net.ssl.HttpsURLConnection;
 public class VerifyRecaptcha {
 
     public static final String url = "https://www.google.com/recaptcha/api/siteverify";
-    public static final String secret = "6LdJHRYTAAAAAA-vGL_rgvJS_74-rneZOk4Odff1";
     private final static String USER_AGENT = "Mozilla/5.0";
 
-    public static boolean verify(String gRecaptchaResponse) throws IOException {
+    public static boolean verify(String gRecaptchaResponse, String recaptchaSecret) throws IOException {
         if (gRecaptchaResponse == null || "".equals(gRecaptchaResponse)) {
             return false;
         }
@@ -33,7 +32,7 @@ public class VerifyRecaptcha {
             con.setRequestProperty("User-Agent", USER_AGENT);
             con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-            String postParams = "secret=" + secret + "&response="
+            String postParams = "secret=" + recaptchaSecret + "&response="
                     + gRecaptchaResponse;
 
             // Send post request

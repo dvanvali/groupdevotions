@@ -43,5 +43,6 @@ public class Config implements Serializable {
 	public String fromNoReplyEmailAddrDesc = "Group Devotions (Do not reply)";
 	public String bibleOrgApiKey = "fill me in";
 	public String forwardContactUsEmailsTo = "somewhere@gmail.com";
+	public String recaptchaSecret = "fill me in";
 }
 
