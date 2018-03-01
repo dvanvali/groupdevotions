@@ -20,7 +20,7 @@ describe('New Account Flow ', function() {
         });
 
         it('does not allow existing account', function() {
-            element(by.model('form.signInEmail')).sendKeys('dvanvali@gmail.com');
+            element(by.model('form.signInEmail')).sendKeys('nongoogle@gmail.com');
             element(by.id('createButton')).click();
 
             expect(element(by.id('messageCreate')).getText()).toMatch(/have an account/);

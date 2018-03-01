@@ -25,7 +25,7 @@ describe('GroupDevotions blog', function() {
             browser.get(indexPage + '#/home');
             element(by.id('loginButton')).click();
             expect(browser.getLocationAbsUrl()).toBe('/login');
-            element(by.model('form.signInEmail')).sendKeys('dvanvali@gmail.com');
+            element(by.model('form.signInEmail')).sendKeys('nongoogle@gmail.com');
             element(by.model('form.signInPassword')).sendKeys('xxxxxx');
             element(by.buttonText('Sign In')).click();
             expect(browser.getLocationAbsUrl()).toBe('/devotion');
@@ -263,7 +263,7 @@ describe('GroupDevotions blog', function() {
             browser.get('/#/home');
             element(by.id('loginButton')).click();
             expect(browser.getLocationAbsUrl()).toBe('/login');
-            element(by.model('form.signInEmail')).sendKeys('dvanvali@gmail.com');
+            element(by.model('form.signInEmail')).sendKeys('nongoogle@gmail.com');
             element(by.model('form.signInPassword')).sendKeys('xxxxxx');
             element(by.buttonText('Sign In')).click();
             expect(browser.getLocationAbsUrl()).toBe('/devotion');

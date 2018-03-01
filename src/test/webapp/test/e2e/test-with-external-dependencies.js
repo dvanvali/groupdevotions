@@ -9,7 +9,7 @@ xdescribe('GroupDevotions with external dependencies', function() {
 
         it('should login', function() {
             browser.get(indexPage + '#/home');
-            element(by.model('form.signInEmail')).sendKeys('dvanvali@gmail.com');
+            element(by.model('form.signInEmail')).sendKeys('nongoogle@gmail.com');
             element(by.model('form.signInPassword')).sendKeys('xxxxxx');
             element(by.buttonText('Sign In')).click();
             expect(browser.getLocationAbsUrl()).toBe('/devotion');

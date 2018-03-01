@@ -89,7 +89,7 @@ describe('Organizations', function() {
     });
 
     it('adds admin to an existing account', function () {
-        var existingAccountEmail = 'dvanvali@gmail.com';
+        var existingAccountEmail = 'nongoogle@gmail.com';
         element(maintainOrganizationPage.addAccountButton).click();
         element(maintainOrganizationLookupAccountPage.email).sendKeys(existingAccountEmail);
         element(maintainOrganizationLookupAccountPage.saveButton).click();

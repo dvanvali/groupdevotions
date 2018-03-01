@@ -30,12 +30,12 @@ describe('GroupDevotions login ', function() {
         });
 
         it('Displays error for bad password', function() {
-            util.login('dvanvali@gmail.com', 'badxxx');
+            util.login('nongoogle@gmail.com', 'badxxx');
             util.expectMessageContains('Your password is incorrect.');
         });
 
         it('Displays error for account does not exist', function() {
-            util.login('baddvanvali@gmail.com', 'xxxxxx');
+            util.login('badnongoogle@gmail.com', 'xxxxxx');
             util.expectMessageContains('Unable to find your account.');
         });
 
@@ -55,7 +55,7 @@ describe('GroupDevotions login ', function() {
         });
 
         it('Can login with an existing account and redirect to devotion', function() {
-            util.login('dvanvali@gmail.com', 'xxxxxx');
+            util.login('nongoogle@gmail.com', 'xxxxxx');
             expect(browser.getLocationAbsUrl()).toBe('/devotion');
             util.logout();
             expect(browser.getLocationAbsUrl()).toBe('/home');
@@ -138,7 +138,7 @@ describe('GroupDevotions login ', function() {
         });
 
         it('displays must enter passwords', function() {
-            element(by.model('form.signInEmail')).sendKeys('dvanvali@gmail.com');
+            element(by.model('form.signInEmail')).sendKeys('nongoogle@gmail.com');
             element(by.id('resetButton')).click();
             util.expectMessageContains('enter your new password');
 
@@ -148,7 +148,7 @@ describe('GroupDevotions login ', function() {
         });
 
         it('displays passwords must match', function() {
-            element(by.model('form.signInEmail')).sendKeys('dvanvali@gmail.com');
+            element(by.model('form.signInEmail')).sendKeys('nongoogle@gmail.com');
             element(by.model('form.signInPassword')).sendKeys('password');
             element(by.model('form.signInPassword2')).sendKeys('notpassword');
             element(by.id('resetButton')).click();
@@ -156,7 +156,7 @@ describe('GroupDevotions login ', function() {
         });
 
         it('displays passwords must be at least six characters', function() {
-            element(by.model('form.signInEmail')).sendKeys('dvanvali@gmail.com');
+            element(by.model('form.signInEmail')).sendKeys('nongoogle@gmail.com');
             element(by.model('form.signInPassword')).sendKeys('pass');
             element(by.model('form.signInPassword2')).sendKeys('pass');
             element(by.id('resetButton')).click();
@@ -164,7 +164,7 @@ describe('GroupDevotions login ', function() {
         });
 
         it('resets password successfully', function() {
-            element(by.model('form.signInEmail')).sendKeys('dvanvali@gmail.com');
+            element(by.model('form.signInEmail')).sendKeys('nongoogle@gmail.com');
             element(by.model('form.signInPassword')).sendKeys('zzzzzz');
             element(by.model('form.signInPassword2')).sendKeys('zzzzzz');
             element(by.id('resetButton')).click();
@@ -173,7 +173,7 @@ describe('GroupDevotions login ', function() {
         });
 
         it('logs in with reset password', function() {
-            util.login('dvanvali@gmail.com', 'zzzzzz');
+            util.login('nongoogle@gmail.com', 'zzzzzz');
             expect(browser.getLocationAbsUrl()).toBe('/devotion');
             util.logout();
             expect(browser.getLocationAbsUrl()).toBe('/home');
@@ -212,7 +212,7 @@ describe('GroupDevotions login ', function() {
 
         it('displays reset email sent', function() {
             element(loginPage.forgotLink).click();
-            element(loginPage.forgotUserName).sendKeys('dvanvali@gmail.com');
+            element(loginPage.forgotUserName).sendKeys('nongoogle@gmail.com');
             element(loginPage.forgotButton).click();
 
             expect(element(by.id('messageForgot')).getText()).toMatch(/reset email has been sent/);

@@ -14,7 +14,12 @@ app.angularApp.controller('LoginCtrl', ['$scope', '$location', '$window', '$time
             if (typeof grecaptcha === 'undefined') {
                 $timeout(renderRecaptcha, 300);
             } else {
-                grecaptcha.render("g-recaptcha", {sitekey: "6LdJHRYTAAAAAMVa2u8NqvzdQRQfHso2kA3caylk"});
+                if ($location.host() === 'localhost') {
+                    // Googles test key
+                    grecaptcha.render("g-recaptcha", {sitekey: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"});
+                } else {
+                    grecaptcha.render("g-recaptcha", {sitekey: "6LdJHRYTAAAAAMVa2u8NqvzdQRQfHso2kA3caylk"});
+                }
             }
         };
 

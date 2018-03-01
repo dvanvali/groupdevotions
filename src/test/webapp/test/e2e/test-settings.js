@@ -10,7 +10,7 @@ describe('GroupDevotions settings ', function() {
         browser.get('/#/home');
         element(by.id('loginButton')).click();
         expect(browser.getLocationAbsUrl()).toBe('/login');
-        element(by.model('form.signInEmail')).sendKeys('dvanvali@gmail.com');
+        element(by.model('form.signInEmail')).sendKeys('nongoogle@gmail.com');
         element(by.model('form.signInPassword')).sendKeys(password);
         element(by.buttonText('Sign In')).click();
         browser.waitForAngular();

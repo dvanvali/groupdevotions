@@ -43,6 +43,7 @@ public class Config implements Serializable {
 	public String fromNoReplyEmailAddrDesc = "Group Devotions (Do not reply)";
 	public String bibleOrgApiKey = "fill me in";
 	public String forwardContactUsEmailsTo = "somewhere@gmail.com";
-	public String recaptchaSecret = "fill me in";
+	// This is the google test recaptcha secret.  Get your own and put it in the database to override this one.
+	public String recaptchaSecret = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
 }
 
