@@ -100,12 +100,12 @@ module.exports = function(grunt) {
         }
     },
     copy: {
-      html: {
+      miscfiles: {
         files: [
           {
             expand: true,
             cwd: config.src,
-            src: ['**/*.html'],
+            src: ['**/*.html','images/*','WEB-INF/*.xml','WEB-INF/*.properties'],
             dest: config.dest,
             filter: 'isFile'
           }
@@ -205,6 +205,6 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['build']);
-  grunt.registerTask('build', ['clean:start', 'copy:html', 'replace:html', 'concat:app', 'concat:libraries', 'copy:maincss', 'concat:less', 'less:app', 'html2js', 'clean:finish']);
+  grunt.registerTask('build', ['clean:start', 'copy:miscfiles', 'replace:html', 'concat:app', 'concat:libraries', 'copy:maincss', 'concat:less', 'less:app', 'html2js', 'clean:finish']);
 
 };

@@ -1,6 +1,5 @@
 package com.groupdevotions.server.rest;
 
-import com.google.appengine.repackaged.com.google.common.collect.Lists;
 import com.google.code.twig.ObjectDatastore;
 import com.google.inject.Inject;
 import com.groupdevotions.server.AnnotationObjectDatastoreProvider;

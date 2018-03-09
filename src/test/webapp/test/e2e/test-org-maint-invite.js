@@ -10,7 +10,7 @@ var studiesPage = require(__dirname + '/pages/studies.page.js')();
 var maintainStudyPage = require(__dirname + '/pages/maintainStudy.page.js')();
 var lessonPage = require(__dirname + '/pages/lesson.page.js')();
 
-fdescribe('Organizations', function() {
+describe('Organizations', function() {
     var orgName = 'Dunamai';
     var accountEmail = new Date().getTime() + '@example.com';
     var groupName = 'New group ' + new Date().getTime();

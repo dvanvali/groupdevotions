@@ -13,7 +13,7 @@
 		<appengine.app.version>2-01</appengine.app.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jersey.version>1.17.1</jersey.version>
-		<gae.version>1.9.15</gae.version>
+		<gae.version>1.9.63</gae.version>
 	</properties>
 
 	<prerequisites>
@@ -85,7 +85,16 @@
 			<artifactId>rome</artifactId>
 			<version>1.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-servlet</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.9.9</version>
+		</dependency>
 
 		<!-- Test Dependencies -->
 		<dependency>
@@ -147,8 +156,8 @@
 				<version>3.1</version>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>

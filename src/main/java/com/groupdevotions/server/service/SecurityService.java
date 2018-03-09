@@ -1,6 +1,5 @@
 package com.groupdevotions.server.service;
 
-import com.google.appengine.repackaged.com.google.common.base.Strings;
 import com.google.code.twig.ObjectDatastore;
 import com.google.inject.Inject;
 import com.groupdevotions.server.dao.GroupDAO;

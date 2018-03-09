@@ -1,7 +1,6 @@
 package com.groupdevotions.server.service;
 
 import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.repackaged.org.joda.time.DateMidnight;
 import com.google.code.twig.ObjectDatastore;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -10,6 +9,7 @@ import com.groupdevotions.server.ServerUtils;
 import com.groupdevotions.server.dao.*;
 import com.groupdevotions.server.util.SharedUtils;
 import com.groupdevotions.shared.model.*;
+import org.joda.time.DateMidnight;
 
 import java.util.Collection;
 import java.util.Date;

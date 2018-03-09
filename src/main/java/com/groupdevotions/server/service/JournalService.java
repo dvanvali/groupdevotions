@@ -1,9 +1,9 @@
 package com.groupdevotions.server.service;
 
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.repackaged.com.google.common.base.Strings;
 import com.google.code.twig.ObjectDatastore;
 import com.google.common.base.Function;
+import com.google.common.base.Strings;
 import com.google.common.collect.Collections2;
 import com.google.inject.Inject;
 import com.groupdevotions.server.ServerUtils;

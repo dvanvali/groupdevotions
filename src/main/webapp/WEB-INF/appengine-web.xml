@@ -3,6 +3,7 @@
     <application>testgroupdevotions</application>
     <version>${appengine.app.version}</version>
 
+    <runtime>java8</runtime>
     <threadsafe>true</threadsafe>
     
     <system-properties>
@@ -10,4 +11,5 @@
     </system-properties>
     <sessions-enabled>true</sessions-enabled>
     <async-session-persistence enabled="true" />
+    <url-stream-handler>urlfetch</url-stream-handler>
 </appengine-web-app>

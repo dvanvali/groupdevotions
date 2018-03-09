@@ -1,9 +1,9 @@
 package com.groupdevotions.shared.model;
 
-import com.google.appengine.repackaged.com.google.common.collect.Lists;
 import com.google.code.twig.annotation.Embedded;
 import com.google.code.twig.annotation.Index;
 import com.google.code.twig.annotation.Store;
+import com.google.common.collect.Lists;
 
 import java.io.Serializable;
 import java.util.ArrayList;

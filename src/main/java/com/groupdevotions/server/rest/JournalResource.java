@@ -1,6 +1,5 @@
 package com.groupdevotions.server.rest;
 
-import com.google.appengine.repackaged.org.joda.time.DateMidnight;
 import com.google.code.twig.ObjectDatastore;
 import com.google.inject.Inject;
 import com.groupdevotions.server.AnnotationObjectDatastoreProvider;
@@ -8,6 +7,7 @@ import com.groupdevotions.server.service.JournalService;
 import com.groupdevotions.server.service.SecurityService;
 import com.groupdevotions.shared.model.Journal;
 import com.groupdevotions.shared.model.UserInfo;
+import org.joda.time.DateMidnight;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;

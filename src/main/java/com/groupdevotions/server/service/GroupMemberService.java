@@ -2,9 +2,8 @@ package com.groupdevotions.server.service;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.repackaged.com.google.common.base.Strings;
-import com.google.appengine.repackaged.org.joda.time.DateMidnight;
 import com.google.code.twig.ObjectDatastore;
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.groupdevotions.server.ServerUtils;
 import com.groupdevotions.server.dao.*;

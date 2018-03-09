@@ -1,7 +1,5 @@
 package com.groupdevotions.server.rest;
 
-import com.google.appengine.repackaged.com.google.common.collect.Lists;
-import com.google.appengine.repackaged.org.joda.time.DateMidnight;
 import com.google.code.twig.ObjectDatastore;
 import com.google.inject.Inject;
 import com.groupdevotions.server.AnnotationObjectDatastoreProvider;
@@ -12,6 +10,7 @@ import com.groupdevotions.shared.model.Account;
 import com.groupdevotions.shared.model.BlogEntry;
 import com.groupdevotions.shared.model.GroupBlog;
 import com.groupdevotions.shared.model.UserInfo;
+import org.joda.time.DateMidnight;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
