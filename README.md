@@ -5,16 +5,15 @@
 Start by installing npm and bower (if they are not in your path, you will need to hunt down the bin directory):
 
 ```shell
+sudo npm install -g bower
+sudo npm install -g grunt
 npm install
-```
-
-```shell
 bower install
 ```
 
-Run import for maven dependancies. 
 
-You may need to also install grunt-cli
+Run import for maven dependancies.
+
 
 ## Notes
 
