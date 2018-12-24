@@ -9,12 +9,12 @@
             <label for="name">Name</label>
             <input id="name" auto-focus type="text" ng-model="organization.name" maxlength="80" size="30"/>
             <button id="saveButton" type="submit" ng-click="save()" class="btn btn-primary">Save</button>
-            <button id="cancelButton" type="button" ng-click="cancel()" class="btn btn-secondary">Cancel</button>
+            <button id="cancelButton" type="button" ng-click="cancel()" class="btn btn-default">Cancel</button>
         </div>
 
         <div ng-if="organization.key || userInfo.account.adminOrganizationKey" >
                 <h2>Admin Users</h2>
-                <button id="addAccountButton" type="button" ng-click="addAccount()" class="btn btn-secondary pull-right"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Account</button>
+                <button id="addAccountButton" type="button" ng-click="addAccount()" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Account</button>
             <div class="row row-grid-header">
                 <span class="col-xs-6 col-sm-4">Name</span>
                 <span class="col-xs-5 col-sm-4">Email Address</span>

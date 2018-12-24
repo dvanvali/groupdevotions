@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<groupId>com.groupdevotions</groupId>
-	<artifactId>testgroupdevotions</artifactId>
+	<artifactId>groupdevotions</artifactId>
 
 	<properties>
 		<appengine.app.version>2-01</appengine.app.version>

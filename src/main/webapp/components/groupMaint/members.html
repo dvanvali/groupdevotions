@@ -95,10 +95,10 @@
                     <span ng-show="currentMember.status !== 'JOINED' && currentMember.status !== 'DECLINED'">Email Invitation</span>
                 </button>
                 <button role="navigation" ng-click="cancelEditMember(currentMember)" ng-disabled="saving"
-                        id="cancelEditButton" class="btn btn-lg my-btn">Cancel
+                        id="cancelEditButton" class="btn btn-lg btn-default my-btn">Cancel
                 </button>
                 <button role="navigation" ng-if="currentMember.key && userInfo.groupMember.key !== currentMember.key" ng-click="deleteMember()" ng-disabled="saving"
-                        id="deleteMember" class="btn btn-lg my-btn">Delete
+                        id="deleteMember" class="btn btn-lg btn-default my-btn">Delete
                 </button>
             </div>
         </fieldset>

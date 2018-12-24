@@ -35,8 +35,8 @@
         </div>
 
         <div ng-repeat="section in lesson.studySections track by $index">
-            <button ng-click="addSectionAbove($index)" class="btn btn-lg addSection">Add Section Above</button>
-            <button ng-click="deleteThisSection($index)" class="btn btn-lg deleteSection">Delete Section Below</button>
+            <button ng-click="addSectionAbove($index)" class="btn btn-lg btn-default addSection">Add Section Above</button>
+            <button ng-click="deleteThisSection($index)" class="btn btn-lg btn-default deleteSection">Delete Section Below</button>
             <div>
                 <label for="sectionType">Type</label>
                 <select id="sectionType" ng-model="section.type">
@@ -56,8 +56,8 @@
         {{message.text}}</div>
 
     <button id="saveButton" ng-click="save()" class="btn btn-lg btn-primary">Save</button>
-    <button id="cancelButton" ng-click="cancel()" class="btn btn-lg">Cancel</button>
-    <button id="deleteButton" ng-show="lesson.key" ng-click="delete()" class="btn btn-lg deleteBlogEntry">Delete</button>
+    <button id="cancelButton" ng-click="cancel()" class="btn btn-default btn-lg">Cancel</button>
+    <button id="deleteButton" ng-show="lesson.key" ng-click="delete()" class="btn btn-lg btn-default deleteBlogEntry">Delete</button>
     <div id="message"/>
     </form>
 </div>

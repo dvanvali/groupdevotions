@@ -1,7 +1,7 @@
 <div class="organizations devotionContainer">
     <div ng-if="!loading">
         <h1>Maintain Organizations</h1>
-        <button id="addButton" ng-click="edit({})" class="btn btn-md btn-secondary pull-right"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Organization</button>
+        <button id="addButton" ng-click="edit({})" class="btn btn-md btn-default pull-right"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Organization</button>
     </div>
 
     <div ng-if="message.text" ng-click="tryAgain()" class="alert alert-{{message.type}}" role="alert" id="message">

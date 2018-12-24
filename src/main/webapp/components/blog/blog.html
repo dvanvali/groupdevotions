@@ -12,7 +12,7 @@
             data-toggle="modal" data-target="#memberDetailDialog" title="{{activity.tooltip}}">
       <span ng-click="loadGroupMemberData(activity)"><img src="images/{{activity.image}}.png" style="height: 16px !important; width: 16px !important" alt="{{activity.image}}"/> <a>{{activity.name}}</a></span>
     </span>
-    <button ng-click="editMembers()" ng-if="myGroupMember.groupAdmin" class="btn btn-sm" id="membersButton"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Members</button>
+    <button ng-click="editMembers()" ng-if="myGroupMember.groupAdmin" class="btn btn-default btn-sm" id="membersButton"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Members</button>
     <div class="modal fade" id="memberDetailDialog" tabindex="-1" role="dialog" aria-labelledby="memberDetailDialog"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -55,11 +55,11 @@
             </button>
             <button ng-click="cancelComment()" ng-disabled="buttonsDisabled" ng-if="mode == COMMENTMODE"
                     id="cancelCommentButton"
-                    class="btn btn-lg my-btn">Cancel
+                    class="btn btn-lg btn-default my-btn">Cancel
             </button>
             <button ng-if="!userInfo.isDesktop && mode == VIEW" ng-click="displayJournal()" type="button" ng-disabled="buttonsDisabled"
                     id="journalButtonBottom"
-                     class="btn btn-lg">View Your Journal</button>
+                     class="btn btn-default btn-lg">View Your Journal</button>
         </div>
     </form>
     <div class="oneEm"></div>
@@ -91,7 +91,7 @@
                     </button>
                     <button ng-click="cancelEditBlog(blogEntry)" ng-disabled="buttonsDisabled"
                             ng-if="blogEntry.mode == COMMENTMODE" id="cancelBlogEditButton"
-                            class="btn btn-lg my-btn">Cancel
+                            class="btn btn-lg btn-default my-btn">Cancel
                     </button>
                 </div>
             </form>

@@ -61,7 +61,7 @@
                         id="completeButton"
                         class="btn btn-lg btn-primary">Reading Completed
                 </button>
-                <button ng-click="makeSettingsVisible(studyLesson.studyKey)" type="button" ng-disabled="buttonsDisabled" ng-if="!readingSettingsVisible" class="btn btn-lg">
+                <button ng-click="makeSettingsVisible(studyLesson.studyKey)" type="button" ng-disabled="buttonsDisabled" ng-if="!readingSettingsVisible" class="btn btn-default btn-lg">
                     <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                 </button>
                 <div ng-if="readingSettingsVisible" class="devotionContainer" width="100%">
@@ -70,7 +70,7 @@
                         <app-bible-reading-settings group-member="groupMember" study-key="{{studyLesson.studyKey}}" message="message"></app-bible-reading-settings>
                         <div class="oneEm"/>
                         <button ng-click="saveSettings(true)" type="button" ng-disabled="buttonsDisabled" class="btn btn-lg btn-primary">Save Settings</button>
-                        <button ng-click="cancelSettings(true)" type="button" ng-disabled="buttonsDisabled" class="btn btn-lg">Cancel</button>
+                        <button ng-click="cancelSettings(true)" type="button" ng-disabled="buttonsDisabled" class="btn btn-default btn-lg">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@
             </button>
             <button ng-click="cancelSettings()" type="button" ng-disabled="buttonsDisabled"
                     id="cancelSettingsButton"
-                    class="btn btn-lg">Cancel
+                    class="btn btn-default btn-lg">Cancel
             </button>
         </div>
     </div>
@@ -128,20 +128,20 @@
     </button>
     <button ng-click="makeSettingsVisible()" type="button" ng-disabled="buttonsDisabled"
             ng-if="devotionHasQuestions && !accountabilitySettingsVisible" id="accountabilitySettingsButton"
-            class="btn btn-lg"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><span
+            class="btn btn-default btn-lg"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><span
             ng-if="!devotionData.accountabilityConfigured"> Setup Accountability</span></span></button>
     <button ng-if="devotionData.studyLessons" ng-click="previousLesson()"
             type="button" ng-disabled="buttonsDisabled"
-            class="btn btn-lg">View Previous Lesson
+            class="btn btn-default btn-lg">View Previous Lesson
     </button>
     <button ng-click="todaysLesson()" ng-if="devotionData.studyLessons && viewingPrevious"
             type="button" ng-disabled="buttonsDisabled"
-            class="btn btn-lg">View Today's Lesson
+            class="btn btn-default btn-lg">View Today's Lesson
     </button>
     <button ng-if="devotionData.studyLessons && !userInfo.isDesktop && !accountabilitySettingsVisible && (!answserForm || !answerForm.$dirty)" ng-click="displayBlog()"
             type="button" ng-disabled="buttonsDisabled"
             id="groupButtonBottom"
-            class="btn btn-lg">View Group Comments
+            class="btn btn-default btn-lg">View Group Comments
     </button>
 
     <div aria-hidden="true" class="halfEm" id="bottomOfPage"></div>

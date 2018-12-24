@@ -2,7 +2,9 @@ module.exports = function(grunt) {
   var config = {
     src: 'src/main/webapp/',
     // Must change this to groupdevotions or testgroupdevotions
-    dest: 'target/testgroupdevotions-0.0.1-SNAPSHOT/'
+    // Along with the pom
+    // And the appengine-web.xml
+    dest: 'target/groupdevotions-0.0.1-SNAPSHOT/'
   };
 
   var nowInMilliseconds = function () {
