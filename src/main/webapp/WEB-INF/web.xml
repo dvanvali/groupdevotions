@@ -3,6 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
+	<servlet>
+		<servlet-name>Assetlinks</servlet-name>
+		<servlet-class>com.groupdevotions.server.WorkAroundHttpServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Assetlinks</servlet-name>
+		<url-pattern>.well-known/pki-validation/5A2C2C10FC7EA0419CA7FDE9857F4718.txt</url-pattern>
+	</servlet-mapping>
+
 	<listener>
 		<listener-class>com.groupdevotions.server.MainGuiceServletContextListener</listener-class>
 	</listener>
