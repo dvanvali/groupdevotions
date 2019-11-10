@@ -497,16 +497,18 @@ public class AccountService {
 		if (errorMessage != null) {
 			return errorMessage;
 		}
-		if (SharedUtils.isEmpty(recaptcha) && !config.development) {
-			return "Please click the recaptcha checkbox.";
-		}
-		try {
-			boolean success = VerifyRecaptcha.verify(recaptcha, config.recaptchaSecret);
-			if (!success && !config.development) {
-				return "Your recaptcha response was not valid.  Please try again.";
+		if (SharedUtils.isEmpty(requestingUrl) || !requestingUrl.contains("groupInvite")) {
+			if (SharedUtils.isEmpty(recaptcha) && !config.development) {
+				return "Please click the recaptcha checkbox.";
 			}
-		} catch (IOException e) {
-			return "Unable to communicate with the recaptcha validation service.";
+			try {
+				boolean success = VerifyRecaptcha.verify(recaptcha, config.recaptchaSecret);
+				if (!success && !config.development) {
+					return "Your recaptcha response was not valid.  Please try again.";
+				}
+			} catch (IOException e) {
+				return "Unable to communicate with the recaptcha validation service.";
+			}
 		}
 		return null;
 	}

@@ -11,7 +11,7 @@ app.angularApp.controller('LoginCtrl', ['$scope', '$location', '$window', '$time
             return "";
         };
         var renderRecaptcha = function () {
-            if (typeof grecaptcha === 'undefined') {
+            if (!window.GDRecaptLoaded) {
                 $timeout(renderRecaptcha, 300);
             } else {
                 if ($location.host() === 'localhost') {
@@ -22,8 +22,6 @@ app.angularApp.controller('LoginCtrl', ['$scope', '$location', '$window', '$time
                 }
             }
         };
-
-        $timeout(renderRecaptcha, 0);
 
         var setCookie = function(cname, cvalue, exdays) {
             var d = new Date();
@@ -50,6 +48,9 @@ app.angularApp.controller('LoginCtrl', ['$scope', '$location', '$window', '$time
         var requestingUrl = GlobalService.getFirstUrl();
         var groupInvite = requestingUrl && (requestingUrl.indexOf('groupInvite') > 0);
         var emailConfirmation = requestingUrl && (requestingUrl.indexOf('newaccount') > 0);
+        if (!groupInvite) {
+            $timeout(renderRecaptcha, 0);
+        }
         $scope.showLogin = !groupInvite;
         $scope.showForgot = false;
         $scope.showCreate = groupInvite;
@@ -160,12 +161,14 @@ app.angularApp.controller('LoginCtrl', ['$scope', '$location', '$window', '$time
                     password2: $scope.form.signInPassword2,
                     name: $scope.form.name,
                     url: GlobalService.getFirstUrl(),
-                    recaptcha: (angular.isUndefined(grecaptcha) ? '' : grecaptcha.getResponse())
+                    recaptcha: (angular.isUndefined(grecaptcha) || groupInvite? '' : grecaptcha.getResponse())
                 },
                 function () {
                     $scope.isDisabled = false;
                     $scope.message = loginResult.message;
-                    grecaptcha.reset();
+                    if (!groupInvite) {
+                        grecaptcha.reset();
+                    }
                     if (loginResult.operationSuccessful) {
                         $scope.form = emptyForm();
                         GlobalService.clearFirstUrl();

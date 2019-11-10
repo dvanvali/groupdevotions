@@ -365,6 +365,9 @@ public class AccountResource {
 	@Consumes(APPLICATION_JSON)
 	public Response<UserInfo> createAccountForPublicUser(@Context HttpServletRequest request, @Context HttpServletResponse response, AccountJson newAccountInfo) throws IOException {
 		ObjectDatastore datastore = annotationObjectDatastoreProvider.get();
+		if (newAccountInfo.email != null) {
+			newAccountInfo.email = newAccountInfo.email.toLowerCase().trim();
+		}
 		String errorMessage =  accountService.validateCreateAccountForPublicUser(datastore, newAccountInfo.email, newAccountInfo.password, newAccountInfo.password2, newAccountInfo.name, newAccountInfo.url, newAccountInfo.recaptcha);
 		if (errorMessage != null) {
 			return new Response(errorMessage);
@@ -391,6 +394,9 @@ public class AccountResource {
 	@Produces(APPLICATION_JSON)
 	@Consumes(APPLICATION_JSON)
 	public Response<String> createAccountForMobileUser(@Context HttpServletRequest request, @Context HttpServletResponse response, AccountJson newAccountInfo) throws IOException {
+		if (newAccountInfo.email != null) {
+			newAccountInfo.email = newAccountInfo.email.toLowerCase().trim();
+		}
 		ObjectDatastore datastore = annotationObjectDatastoreProvider.get();
 		String errorMessage =  accountService.validateCreateAccountForMobileUser(newAccountInfo.email, newAccountInfo.deviceUuid);
 		if (errorMessage != null) {

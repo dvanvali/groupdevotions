@@ -153,6 +153,7 @@ public class GroupMemberService {
             } catch (AddressException e) {
                 return "\"" + groupMember.email + "\" is not a valid email address.";
             }
+            groupMember.email = groupMember.email.toLowerCase();
         }
         return null;
     }
