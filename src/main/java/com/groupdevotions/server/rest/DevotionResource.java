@@ -31,6 +31,17 @@ public class DevotionResource {
     }
 
     @GET
+    @Path("/dunamai")
+    @Produces(APPLICATION_JSON)
+    @Consumes(APPLICATION_JSON)
+    public Response<DevotionData> dunami(@Context HttpServletRequest request) {
+        Response<DevotionData> response;
+        ObjectDatastore datastore = annotationObjectDatastoreProvider.get();
+        response = devotionService.getDunamai(datastore);
+        return response;
+    }
+
+    @GET
     @Path("/today")
     @Produces(APPLICATION_JSON)
     @Consumes(APPLICATION_JSON)

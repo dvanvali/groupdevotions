@@ -58,7 +58,8 @@ public class TestDataService {
         orgAdminAccount.adminOrganizationKey = organization.key;
         accountDAO.update(datastore, orgAdminAccount);
 
-        Study extraStudy = createStudy("Extra", true);
+        Study extraStudy = createStudy("Dunamai", true);
+//        Study extraStudy = createStudy("Extra", true);
         Account nonGoogleAccount = createNonGoogleAccount("nongoogle@gmail.com", "Dan V", "xxxxxx", null, false);
         createLockedAccount("locked@gmail.com", "xxxxxx");
         Account groupOwnerAccount = createNonGoogleAccount("groupowner@gmail.com", "Dan G", "xxxxxx", null, false);

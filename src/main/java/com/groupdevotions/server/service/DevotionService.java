@@ -1,6 +1,7 @@
 package com.groupdevotions.server.service;
 
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.repackaged.com.google.common.collect.Maps;
 import com.google.code.twig.ObjectDatastore;
 import com.google.inject.Inject;
 import com.groupdevotions.server.ServerUtils;
@@ -43,6 +44,21 @@ public class DevotionService {
         this.studyDAO = studyDAO;
         this.studyLessonDAO = studyLessonDAO;
         this.studyLogicFactory = studyLogicFactory;
+    }
+
+    public Response<DevotionData> getDunamai(ObjectDatastore datastore) {
+        List<StudyLesson> studyLessons = new ArrayList<StudyLesson>();
+        Study studyForGroup = null;
+        for(Study study : studyDAO.readPublicDailyStudies(datastore)) {
+            if (study.title.contains("Dunamai")) {
+                studyForGroup = study;
+            }
+        }
+        StudyLogic groupStudyLogic = studyLogicFactory.getInstance(studyForGroup);
+        StudyLesson studyLesson = groupStudyLogic.readLesson(datastore, null, 0);
+        addStudyLesson(studyLessons, studyLesson);
+        DevotionData devotionData = new DevotionData(studyLessons, new HashMap<String, List<BlogEntry>>(), true);
+        return new Response<>(devotionData);
     }
 
     public Response<DevotionData> getDevotions(ObjectDatastore datastore, UserInfo userInfo, StudyLessonNavigation navigation, int relativeIndex) {
