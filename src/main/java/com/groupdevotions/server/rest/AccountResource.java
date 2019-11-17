@@ -196,7 +196,7 @@ public class AccountResource {
 	}
 
 	private void setKeepMeLoggedInCookies(HttpServletResponse response, ObjectDatastore datastore, Account account) {
-		int daysToKeepLoggedIn = 7;
+		int daysToKeepLoggedIn = 60;
 		String token = String.valueOf(new Random().nextLong());
 		response.addCookie(createPersistentCookie(COOKIE_NAME_USERID, account.userId, daysToKeepLoggedIn));
 		Cookie tokenCookie = createPersistentCookie(COOKIE_NAME_TOKEN, token, daysToKeepLoggedIn);
