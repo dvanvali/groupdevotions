@@ -29,7 +29,7 @@ public class GroupMember implements Serializable, KeyMirror, PostLoad, PreSave {
 	public String lastCompletedStudyLessonKey;
 	public String lastCompletedDateAsString;
 	public String lastCompletedBibleReadingIndex;
-	public String bibleReadingVersion = "nasb";
+	public String bibleReadingVersion = "asv";
 	public String lastAccountabilityDateAsString;
 	public boolean groupAdmin = false;
 	
@@ -55,6 +55,9 @@ public class GroupMember implements Serializable, KeyMirror, PostLoad, PreSave {
 	public void postLoad() {
 		if (!Strings.isNullOrEmpty(accountabilityEmail)) {
 			accountabilityEmails = Lists.newArrayList(accountabilityEmail.split(","));
+		}
+		if (!"asv|basicenglish|darby|kjv|akjv|ylt|web|wb".contains(bibleReadingVersion)) {
+			bibleReadingVersion = "asv";
 		}
 	}
 
