@@ -490,7 +490,7 @@ public class AccountService {
 		if (errorMessage != null) {
 			return errorMessage;
 		}
-		if (Strings.isNullOrEmpty(name)) {
+		if ((requestingUrl == null || !requestingUrl.contains("groupInvite=")) && Strings.isNullOrEmpty(name)) {
 			return "Please enter your name.";
 		}
 		errorMessage = validatePassword(password1, password2);

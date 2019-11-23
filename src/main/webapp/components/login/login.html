@@ -73,7 +73,7 @@
         <div class="input-row" ng-if="!groupInvite">
             <input id="create-email" ng-model="form.signInEmail" type="text" class="form-control" placeholder="Email address" maxLength="35"/>
         </div>
-        <div class="input-row">
+        <div class="input-row" ng-if="!groupInvite">
             <input ng-model="form.name" type="text" class="form-control" placeholder="Name" maxLength="35"/>
         </div>
         <div class="input-row">

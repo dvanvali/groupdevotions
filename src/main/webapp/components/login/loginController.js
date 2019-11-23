@@ -58,7 +58,7 @@ app.angularApp.controller('LoginCtrl', ['$scope', '$location', '$window', '$time
         $scope.showForgot = false;
         $scope.showCreate = $scope.groupInvite;
         if ($scope.groupInvite) {
-            $scope.message = GlobalService.info('To accept your group invitation, please create an account.');
+            $scope.message = GlobalService.info('To accept your group invitation, please enter a password to create an account.');
         } else if (emailConfirmation) {
             $scope.message = GlobalService.info('Please login to finish the registration process.');
         }
