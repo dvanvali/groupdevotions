@@ -46,15 +46,18 @@ app.angularApp.controller('LoginCtrl', ['$scope', '$location', '$window', '$time
         $scope.isDisabled = false;
 
         var requestingUrl = GlobalService.getFirstUrl();
-        var groupInvite = requestingUrl && (requestingUrl.indexOf('groupInvite') > 0);
+        $scope.groupInvite = requestingUrl && (requestingUrl.indexOf('groupInvite') > 0);
+        if ($scope.groupInvite) {
+            $scope.form.signInEmail = decodeURIComponent(requestingUrl.substr(requestingUrl.indexOf('email=')+6));
+        }
         var emailConfirmation = requestingUrl && (requestingUrl.indexOf('newaccount') > 0);
-        if (!groupInvite) {
+        if (!$scope.groupInvite) {
             $timeout(renderRecaptcha, 0);
         }
-        $scope.showLogin = !groupInvite;
+        $scope.showLogin = !$scope.groupInvite;
         $scope.showForgot = false;
-        $scope.showCreate = groupInvite;
-        if (groupInvite) {
+        $scope.showCreate = $scope.groupInvite;
+        if ($scope.groupInvite) {
             $scope.message = GlobalService.info('To accept your group invitation, please create an account.');
         } else if (emailConfirmation) {
             $scope.message = GlobalService.info('Please login to finish the registration process.');
@@ -161,12 +164,12 @@ app.angularApp.controller('LoginCtrl', ['$scope', '$location', '$window', '$time
                     password2: $scope.form.signInPassword2,
                     name: $scope.form.name,
                     url: GlobalService.getFirstUrl(),
-                    recaptcha: (angular.isUndefined(grecaptcha) || groupInvite? '' : grecaptcha.getResponse())
+                    recaptcha: (angular.isUndefined(grecaptcha) || $scope.groupInvite? '' : grecaptcha.getResponse())
                 },
                 function () {
                     $scope.isDisabled = false;
                     $scope.message = loginResult.message;
-                    if (!groupInvite) {
+                    if (!$scope.groupInvite) {
                         grecaptcha.reset();
                     }
                     if (loginResult.operationSuccessful) {
