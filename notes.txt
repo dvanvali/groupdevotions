@@ -4,6 +4,7 @@ bower install <module> --save (or save-dev)
 installing globally will allow execute for the module
 protractor 5.0 webdriver seems to run java 1.8, not 1.7
 recaptcha is generating a warning popup during protractor testing
+when building the first time, run build grunt task before starting GAE server
 
 dvanvalin@oke-dvanvalin-mb:~$ gcloud init
 dvanvalin@oke-dvanvalin-mb:~$ gcloud components install app-engine-java
