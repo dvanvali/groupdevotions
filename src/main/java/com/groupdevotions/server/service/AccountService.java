@@ -636,7 +636,7 @@ public class AccountService {
 			if (groupMember != null && groupMember.email.equalsIgnoreCase(groupMemberEmail)) {
 				account.confirmed = true;
 				account.confirmedByEmail = true;
-				if (account.name == null) {
+				if (SharedUtils.isEmpty(account.name)) {
 					account.name = groupMember.name;
 				} else {
 					groupMember.name = account.name;
