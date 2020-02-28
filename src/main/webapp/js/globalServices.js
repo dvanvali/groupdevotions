@@ -237,14 +237,14 @@ app.angularApp.factory('GlobalService', ['$location', '$window', '$timeout', '$a
                         showLoggedInHomePage();
                     }
                     if (callbackWhenDone) {
-                        callbackWhenDone();
+                        callbackWhenDone(true);
                     }
                 },
                 function () {
                     // No way to communicate from the header?  maybe we could add a message at the top for all server
                     // communication eventually
                     if (callbackWhenDone) {
-                        callbackWhenDone();
+                        callbackWhenDone(false);
                     }
                 });
         };

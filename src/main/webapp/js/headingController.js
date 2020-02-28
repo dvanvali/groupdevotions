@@ -212,16 +212,26 @@ app.angularApp.controller('HeadingCtrl', ['$scope', '$rootScope', '$location', '
             return isLoggedIn() && $scope.userInfo.account.adminOrganizationKey;
         };
 
-        GlobalService.checkLoggedIn(function() {
-            $scope.checkingLogin = false;
-            $scope.userInfo = GlobalService.getUserInfo();
-            $scope.isStudyContributor = GlobalService.isStudyContributor();
-            GlobalService.setUserInfoChangeListener(function (userInfo) {
-                $scope.userInfo = userInfo;
-                $scope.isStudyContributor = GlobalService.isStudyContributor();
-                $scope.loginShowing = (userInfo ? false : true);
+        $scope.tryCheckLoggedIn = function() {
+            $scope.checkLoggedInFailure = false;
+            GlobalService.checkLoggedIn(function (success) {
+                $scope.checkingLogin = false;
+                if (success) {
+                    $scope.userInfo = GlobalService.getUserInfo();
+                    $scope.isStudyContributor = GlobalService.isStudyContributor();
+                    GlobalService.setUserInfoChangeListener(function (userInfo) {
+                        $scope.userInfo = userInfo;
+                        $scope.isStudyContributor = GlobalService.isStudyContributor();
+                        $scope.loginShowing = (userInfo ? false : true);
+                    });
+                } else {
+                    $scope.checkLoggedInFailure = true;
+                    $scope.checkingLogin = false;
+                }
             });
-        });
+        };
+
+        $scope.tryCheckLoggedIn();
 
         $scope.contactUs = function() {
             var modalInstance = $uibModal.open({
