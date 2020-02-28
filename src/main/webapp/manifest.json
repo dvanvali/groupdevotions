@@ -1,0 +1,22 @@
+{
+  "short_name": "GroupDevo",
+  "name": "GroupDevotions",
+  "icons": [
+    {
+      "src": "/favicon-3.png",
+      "type": "image/png",
+      "sizes": "24x24"
+    },
+    {
+      "src": "/favicon-3-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/index.html",
+  "background_color": "#404040",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "theme_color": "#00ada7"
+}

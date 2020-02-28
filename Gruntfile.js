@@ -4,11 +4,15 @@ module.exports = function(grunt) {
     // Must change this to groupdevotions or testgroupdevotions
     // Along with the pom
     // And the appengine-web.xml
+    // dest: 'target/testgroupdevotions-0.0.1-SNAPSHOT/'
     dest: 'target/groupdevotions-0.0.1-SNAPSHOT/'
   };
-
+  var cachedTime;
   var nowInMilliseconds = function () {
-      return (new Date()).getTime();
+      if (!cachedTime) {
+        cachedTime = (new Date()).getTime();
+      }
+      return cachedTime;
   };
 
   // Project configuration.
@@ -55,7 +59,7 @@ module.exports = function(grunt) {
                 {
                   cwd: config.src,
                   expand: true,
-                  src: ['index.html'],
+                  src: ['index.html','sw.js'],
                   dest: config.dest
                 }
             ]
@@ -72,7 +76,8 @@ module.exports = function(grunt) {
           */
           src: [
             config.src + "app.js",
-            config.src + "**/*.js"
+            config.src + "**/*.js",
+            config.src + "!sw.js"
           ],
           dest: config.dest + 'scripts/app.js'
         },

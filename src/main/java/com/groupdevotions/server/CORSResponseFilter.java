@@ -24,6 +24,9 @@ public class CORSResponseFilter implements ContainerResponseFilter {
         headers.add("Access-Control-Allow-Headers", "Content-Type, Accept");
         headers.add("Access-Control-Allow-Credentials", "true");
 
+        if (containerRequest.getPath().contains("sw.js")) {
+            headers.add("Service-Worker-Allowed", "/");
+        }
         return containerResponse;
     }
 }
