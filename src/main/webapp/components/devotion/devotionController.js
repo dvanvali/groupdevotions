@@ -33,6 +33,7 @@ app.angularApp.controller('DevotionCtrl', ['$scope', '$routeParams', '$location'
               $scope.accountabilitySettingsVisible = false;
               $scope.readingSettingsVisible = false;
               $scope.buttonsDisabled = false;
+              $scope.hideEmailReadingCompleteButton = false;
               GlobalService.scrollToView('topOfPage');
               var response = DevotionService.get({devotionId: 'today', time: (new Date()).toString()}, function () {
                   $scope.message = response.message;
