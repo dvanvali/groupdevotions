@@ -1,5 +1,6 @@
 package com.groupdevotions.server;
 
+import com.groupdevotions.shared.model.Config;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.mail.Message;
@@ -187,13 +188,13 @@ public class ServerUtils {
 		return cal.getTime();
 	}
 	
-	public static boolean sendEmail(String email, String subject, String body) {
+	public static boolean sendEmail(Config config, String email, String subject, String body) {
 		boolean emailSent = false;
 		try { 
 			Properties props = new Properties();
 			Session session = Session.getDefaultInstance(props, null);
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("groupdevotions.noreply@gmail.com", "Group Devotions (Do not reply)"));
+			message.setFrom(new InternetAddress(config.fromNoReplyEmailAddr, config.fromNoReplyEmailAddrDesc));
 			message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 			message.setSubject(subject);
 			message.setText(body);

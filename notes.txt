@@ -22,3 +22,14 @@ REM pause Execute tests?
 REM start /b cmd /c protractor src\test\webapp\test\e2e\protractor-conf.js
 REM start /b cmd /c protractor protractor-conf.js
 protractor protractor-conf.js
+
+deployment error invalid_grant remove auth file:
+$ rm .appcfg_oauth2_tokens_java
+
+You need to do hard reloads between testing dev
+
+If you have trouble with maven plugins, you might need to connect to the vpn so you can get to the .m2 configured
+repositories
+
+Had trouble using gcloud because there was no service member in IAM.  Created one and added Cloud Database User and
+Service Account Agent

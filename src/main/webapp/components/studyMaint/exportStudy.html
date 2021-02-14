@@ -1,0 +1,53 @@
+<div ng-if="message.text" ng-click="tryAgain()" class="alert alert-{{message.type}}" role="alert" id="message">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    {{message.text}}</div>
+
+<div ng-if="!loading" ng-repeat="studyLesson in studyLessons track by $index">
+    <div ng-if="!studyLesson.accountabilityLesson" class="lessonTiming">{{studyLesson.devotionPageTagLine}}
+    </div>
+    <div ng-if="!studyLesson.accountabilityLesson" class="lessonTitle">{{studyLesson.title}}</div>
+    <div ng-if="!studyLesson.accountabilityLesson && studyLesson.author" class="devotionAuthor">by
+        {{studyLesson.author}}
+    </div>
+    <div ng-repeat="section in studyLesson.studySections" class="lessonSection {{section.type}}">
+        <div>
+            <p>
+                <span ng-bind-html="section.content"></span>
+                <select ng-if="section.type == 'SCRIPTURE_TO_LOAD'" ng-change="versionChange(section)" ng-model="section.version" class="versionSelect">
+                    <option value="asv">ASV</option>
+                    <option value="basicenglish">BBE</option>
+                    <option value="darby">DBY</option>
+                    <option value="kjv">KJV</option>
+                    <option value="akjv">AKJV</option>
+                    <option value="ylt">YLT</option>
+                    <option value="web">WEB</option>
+                    <option value="wb">WB</option>
+                </select>
+            </p>
+            <div ng-if="section.type == 'TEXT_QUESTION' || section.type == 'YESNO_QUESTION'"
+                 class="answerContainer">
+                        <textarea rows="6" class="questionTextbox" ng-if="section.type == 'TEXT_QUESTION'"
+                                  ng-model="section.answer"/>
+                    <span ng-if="section.type == 'YESNO_QUESTION'">
+                        <input type="radio" ng-model="section.answer" value="Y"> Yes<br/>
+                        <input type="radio" ng-model="section.answer" value="N"> No
+                    </span>
+            </div>
+            <div ng-if="section.type == 'SCRIPTURE_TO_LOAD'">
+                <app-loading loading="section.loading"></app-loading>
+                        <span ng-show="!section.loading" class="verse" data-ng-repeat="(key, verse) in section.bible.chapter">
+                            <span class="ref"><sup>{{verse.verse_nr}}</sup></span>{{verse.verse}}
+                        </span>
+                        <span ng-show="!section.loading">
+                            <span ng-repeat="passage in section.bible.passages" ng-bind-html="passage.text"></span>
+                        </span>
+                <div class="copyright" ng-if="section.bible.passages[0].copyright">
+                    <span ng-bind-html="section.bible.passages[0].copyright"></span>
+                </div>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="!studyLesson.accountabilityLesson" class="horizontalBar"/>
+</div>

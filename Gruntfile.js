@@ -4,8 +4,8 @@ module.exports = function(grunt) {
     // Must change this to groupdevotions or testgroupdevotions
     // Along with the pom
     // And the appengine-web.xml
-    // dest: 'target/testgroupdevotions-0.0.1-SNAPSHOT/'
-    dest: 'target/groupdevotions-0.0.1-SNAPSHOT/'
+    dest: 'target/testgroupdevotions-0.0.1-SNAPSHOT/'
+    // dest: 'target/groupdevotions-0.0.1-SNAPSHOT/'
   };
   var cachedTime;
   var nowInMilliseconds = function () {

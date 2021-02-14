@@ -7,7 +7,11 @@
     <label for="recentFilter" class="checkbox-inline filter"><input id="recentFilter" type="checkbox" ng-model="settings.studyFilter" ng-value="true"> Only Show Next Two Weeks</label>
     <form name="forms.journalForm">
     <div class="well well-sm" ng-repeat="study in studies">
-      <span class="pageSubheading">{{study.title}}</span> <button ng-if="userInfo.account.adminOrganizationKey || userInfo.account.siteAdmin" ng-click="editStudy(study)" class="btn btn-sm pull-right editButton"><span class="glyphicon glyphicon-pencil" title="Edit"></span> Edit Study</button>
+      <span class="pageSubheading">{{study.title}}</span>
+      <span ng-if="userInfo.account.adminOrganizationKey || userInfo.account.siteAdmin" class="pull-right">
+        <button ng-click="editStudy(study)" class="btn btn-sm editButton"><span class="glyphicon glyphicon-pencil" title="Edit"></span> Edit Study</button>
+        <button ng-if="study.studyType !== 'RSS' && study.studyType !== 'BIBLE' && userInfo.account.siteAdmin" ng-click="exportStudy(study)" class="btn btn-sm editButton">Export Study</button>
+      </span>
       <div ng-if="study.studyType !== 'RSS' && study.studyType !== 'BIBLE'">
         <button ng-click="addLessonInfo(study)" class="btn btn-lg btn-primary addLesson"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add New Lesson</button>
       </div>

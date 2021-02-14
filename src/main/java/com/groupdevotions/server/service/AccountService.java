@@ -214,7 +214,7 @@ public class AccountService {
 			String body = "To reset your password for your GroupDevotions account, click on this link or paste it into your browser: " +
 					config.siteUrl + "#resetToken=" + account.resetToken +
 					"  This link will be good for one hour.";
-			if (ServerUtils.sendEmail(account.email, subject, body)) {
+			if (ServerUtils.sendEmail(configService.getApplicationConfig(), account.email, subject, body)) {
 				accountDAO.update(datastore, account, KeyFactory.stringToKey(account.key));
 			} else {
 				message = "Something went wrong attempting to send an email to your email account.";
@@ -696,7 +696,7 @@ public class AccountService {
 				"copy the link into a browser like Internet Explorer or Chrome.\n\n" +
 				config.siteUrl + "#admin&resetToken=" + account.resetToken;
 
-		ServerUtils.sendEmail(account.email, subject, body);
+		ServerUtils.sendEmail(configService.getApplicationConfig(), account.email, subject, body);
 	}
 
 	private void sendNewAccountConfirmationEmail(Account account) {
@@ -705,7 +705,7 @@ public class AccountService {
 				"GroupDevotions account using this email address by clicking on the link below.  You may also " +
 				"copy the link into a browser like Internet Explorer or Chrome.\n\n" +
 				config.siteUrl + account.newAccountUrl();
-		ServerUtils.sendEmail(account.email, subject, body);
+		ServerUtils.sendEmail(configService.getApplicationConfig(), account.email, subject, body);
 	}
 
 	private void sendNewAccountConfirmationEmailMobile(Account account) {
@@ -713,7 +713,7 @@ public class AccountService {
 		String body = "Thank you for creating an account with GroupDevotions.  Please confirm that you created a " +
 				"GroupDevotions account by entering this code in the GroupDevotions application:\n\n" +
 				account.mobileToken;
-		ServerUtils.sendEmail(account.email, subject, body);
+		ServerUtils.sendEmail(configService.getApplicationConfig(), account.email, subject, body);
 	}
 
 	@VisibleForTesting

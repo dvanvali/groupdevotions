@@ -52,6 +52,11 @@ app.angularApp.controller('StudiesCtrl', ['$scope', '$location', 'GlobalService'
             $location.path('/maintainStudy');
         };
 
+        $scope.exportStudy = function (study) {
+            StudyService.setEntityToEdit(study);
+            $location.path('/exportStudy');
+        };
+
         $scope.editLessonInfo = function (lessonInfo) {
             LessonService.loadEntityToEdit(lessonInfo.studyLessonKey, function () {
                     $location.path('/maintainLesson');

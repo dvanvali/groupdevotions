@@ -2,13 +2,16 @@
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
     <!-- !! if you update the application name, go change it in gruntfile.js -->
     <!-- And the pom file! -->
-    <!--<application>testgroupdevotions</application>-->
-    <application>groupdevotions</application>
+    <application>testgroupdevotions</application>
+    <!--<application>groupdevotions</application>-->
     <version>${appengine.app.version}</version>
 
     <runtime>java8</runtime>
     <threadsafe>true</threadsafe>
-    
+    <automatic-scaling>
+        <max-instances>1</max-instances>
+    </automatic-scaling>
+
     <system-properties>
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     </system-properties>

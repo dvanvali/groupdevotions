@@ -7,8 +7,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<groupId>com.groupdevotions</groupId>
-	<artifactId>groupdevotions</artifactId>
-	<!--<artifactId>testgroupdevotions</artifactId>-->
+	<!--<artifactId>groupdevotions</artifactId>-->
+	<artifactId>testgroupdevotions</artifactId>
 
 	<properties>
 		<appengine.app.version>2-01</appengine.app.version>
@@ -197,13 +197,29 @@
 				</executions>
 			</plugin>
 
+			<!--<plugin>-->
+				<!--<groupId>com.google.appengine</groupId>-->
+				<!--<artifactId>appengine-maven-plugin</artifactId>-->
+				<!--<version>1.9.63</version>-->
+				<!--<configuration>-->
+					<!--<enableJarClasses>false</enableJarClasses>-->
+					<!--<address>localhost</address>-->
+					<!--<port>8080</port>-->
+					<!--<jvmFlags>-->
+						<!--<jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8080,server=y,suspend=n</jvmFlag>-->
+					<!--</jvmFlags>-->
+				<!--</configuration>-->
+			<!--</plugin>-->
+
 			<plugin>
-				<groupId>com.google.appengine</groupId>
+				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>appengine-maven-plugin</artifactId>
-				<version>${gae.version}</version>
+				<version>2.2.0</version>
 				<configuration>
+					<deploy.projectId>testgroupdevotions</deploy.projectId>
+					<deploy.version>1</deploy.version>
 					<enableJarClasses>false</enableJarClasses>
-					<address>localhost</address>
+					<!--<address>localhost</address>-->
 					<port>8080</port>
 					<jvmFlags>
 						<jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8080,server=y,suspend=n</jvmFlag>

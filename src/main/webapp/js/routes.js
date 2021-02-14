@@ -35,6 +35,8 @@ app.angularApp.config(['$routeProvider', function ($routeProvider) {
             {templateUrl: 'components/groupMaint/maintainGroup.html', controller: 'MaintainGroupCtrl'});
         $routeProvider.when('/maintainStudy',
             {templateUrl: 'components/studyMaint/maintainStudy.html', controller: 'MaintainStudyCtrl'});
+        $routeProvider.when('/exportStudy',
+            {templateUrl: 'components/studyMaint/exportStudy.html', controller: 'ExportStudyCtrl'});
         $routeProvider.when('/maintainLesson',
             {templateUrl: 'components/studyMaint/maintainLesson.html', controller: 'MaintainLessonCtrl'});
         $routeProvider.otherwise({redirectTo: '/home'});
